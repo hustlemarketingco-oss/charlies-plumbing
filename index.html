@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlie's Plumbing & Drain Cleaning | Salt Lake City, Utah</title>
+<meta name="description" content="Salt Lake City's most trusted plumbing company. 24/7 emergency service, drain cleaning, water heaters, sewer repair and more. Call (801) 406-8585.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #C0392B;
+  --red-dark: #96281B;
+  --red-light: #E74C3C;
+  --blue: #1A3A5C;
+  --blue-mid: #2471A3;
+  --blue-light: #2980B9;
+  --white: #FFFFFF;
+  --off: #F8F9FA;
+  --gray: #ECF0F1;
+  --text: #2C3E50;
+  --muted: #7F8C8D;
+  --gold: #F39C12;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Barlow', sans-serif; color: var(--text); overflow-x: hidden; }
+
+/* ── HEADER ── */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--blue); border-bottom: 3px solid var(--red);
+  transition: all 0.3s;
+}
+header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.header-top {
+  background: var(--red);
+  padding: 6px 0;
+  text-align: center;
+  font-size: 13px;
+  color: white;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.header-top a { color: white; text-decoration: none; }
+.header-main {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 24px;
+}
+.logo-wrap { display: flex; align-items: center; gap: 12px; }
+.logo-icon {
+  width: 48px; height: 48px; background: var(--red);
+  border-radius: 10px; display: flex; align-items: center;
+  justify-content: center; font-size: 24px; flex-shrink: 0;
+}
+.logo-text { line-height: 1; }
+.logo-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+  color: white; letter-spacing: 2px;
+}
+.logo-name span { color: var(--red-light); }
+.logo-tag {
+  font-size: 10px; color: rgba(255,255,255,0.5);
+  letter-spacing: 2px; text-transform: uppercase;
+}
+nav { display: flex; align-items: center; gap: 6px; }
+nav a {
+  color: rgba(255,255,255,0.8); text-decoration: none;
+  font-size: 13px; font-weight: 600; padding: 6px 12px;
+  border-radius: 6px; transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+.nav-cta {
+  background: var(--red) !important; color: white !important;
+  padding: 8px 20px !important; border-radius: 8px !important;
+  font-size: 14px !important;
+}
+.nav-cta:hover { background: var(--red-dark) !important; }
+.mobile-menu-btn {
+  display: none; background: none; border: none;
+  color: white; font-size: 24px; cursor: pointer; padding: 4px;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--blue) 0%, #0d1f35 60%, #1a0a0a 100%);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding-top: 110px;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-stripe {
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 40%; background: var(--red);
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+  opacity: 0.08;
+}
+.hero-content {
+  max-width: 1200px; margin: 0 auto; padding: 80px 24px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4);
+  color: #E74C3C; font-size: 12px; font-weight: 700;
+  padding: 6px 14px; border-radius: 20px; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.hero-badge::before { content: '●'; font-size: 8px; animation: blink 1.5s infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 7vw, 88px);
+  color: white; line-height: 0.95;
+  letter-spacing: 2px; margin-bottom: 20px;
+}
+.hero-title span { color: var(--red-light); display: block; }
+.hero-sub {
+  font-size: 18px; color: rgba(255,255,255,0.7);
+  line-height: 1.6; margin-bottom: 32px;
+  font-family: 'Barlow', sans-serif;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+.btn-hero-primary {
+  background: var(--red); color: white;
+  padding: 16px 32px; border-radius: 10px;
+  font-size: 16px; font-weight: 700; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s; letter-spacing: 0.5px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+}
+.btn-hero-primary:hover { background: var(--red-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,57,43,0.4); }
+.btn-hero-secondary {
+  background: rgba(255,255,255,0.1); color: white;
+  padding: 16px 32px; border-radius: 10px;
+  font-size: 18px; font-weight: 700; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: all 0.2s; border: 1px solid rgba(255,255,255,0.2);
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.btn-hero-secondary:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+.hero-trust {
+  display: flex; gap: 24px; flex-wrap: wrap;
+}
+.hero-trust-item {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.6); font-size: 13px; font-weight: 600;
+}
+.hero-trust-item span { color: var(--gold); font-size: 16px; }
+.hero-card {
+  background: white; border-radius: 16px; padding: 32px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+.hero-card-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px;
+  color: var(--blue); letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.hero-card-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 12px 14px; border: 1.5px solid #E2E6EA;
+  border-radius: 8px; font-size: 14px; font-family: 'Barlow', sans-serif;
+  color: var(--text); outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blue); }
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn-form {
+  width: 100%; padding: 14px; background: var(--red); color: white;
+  border: none; border-radius: 8px; font-size: 16px; font-weight: 700;
+  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-form:hover { background: var(--red-dark); }
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--blue); padding: 20px 0;
+  border-top: 3px solid var(--red); border-bottom: 3px solid var(--red);
+}
+.trust-bar-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; justify-content: space-around; align-items: center;
+  flex-wrap: wrap; gap: 16px;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 10px;
+  color: white; font-size: 14px; font-weight: 600;
+  font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.5px;
+}
+.trust-item-icon { font-size: 22px; }
+
+/* ── SECTIONS ── */
+section { padding: 80px 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-label {
+  font-size: 12px; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--red); margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5vw, 56px);
+  color: var(--blue); letter-spacing: 2px;
+  line-height: 1; margin-bottom: 16px;
+}
+.section-sub {
+  font-size: 17px; color: var(--muted);
+  max-width: 600px; line-height: 1.6;
+}
+.section-header { margin-bottom: 48px; }
+.section-header.center { text-align: center; }
+.section-header.center .section-sub { margin: 0 auto; }
+
+/* ── SERVICES ── */
+.services { background: var(--off); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.service-card {
+  background: white; border-radius: 14px; padding: 28px;
+  border: 1px solid #E2E6EA; transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 4px; background: var(--red); transform: scaleX(0);
+  transition: transform 0.3s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  width: 56px; height: 56px; background: var(--off);
+  border-radius: 12px; display: flex; align-items: center;
+  justify-content: center; font-size: 26px; margin-bottom: 16px;
+  transition: background 0.3s;
+}
+.service-card:hover .service-icon { background: var(--red-light); }
+.service-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px; font-weight: 700; color: var(--blue);
+  margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.service-desc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.service-link {
+  font-size: 13px; font-weight: 700; color: var(--red);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+}
+.service-link:hover { gap: 8px; }
+
+/* ── WHY US ── */
+.why-us { background: var(--blue); }
+.why-us .section-title { color: white; }
+.why-us .section-label { color: var(--red-light); }
+.why-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px; margin-top: 48px;
+}
+.why-item {
+  background: rgba(255,255,255,0.06); border-radius: 12px;
+  padding: 24px; border: 1px solid rgba(255,255,255,0.1);
+  transition: background 0.2s;
+}
+.why-item:hover { background: rgba(255,255,255,0.1); }
+.why-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 48px;
+  color: var(--red-light); letter-spacing: 2px; line-height: 1;
+  margin-bottom: 8px; opacity: 0.7;
+}
+.why-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 18px;
+  font-weight: 700; color: white; margin-bottom: 8px; letter-spacing: 0.5px;
+}
+.why-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+/* ── REVIEWS ── */
+.reviews { background: white; }
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+.review-card {
+  background: var(--off); border-radius: 14px; padding: 24px;
+  border: 1px solid #E2E6EA; transition: all 0.2s;
+}
+.review-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.stars { color: var(--gold); font-size: 18px; margin-bottom: 12px; }
+.review-text {
+  font-size: 15px; color: var(--text); line-height: 1.7;
+  margin-bottom: 16px; font-style: italic;
+}
+.review-author {
+  display: flex; align-items: center; gap: 12px;
+}
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 16px; color: white;
+}
+.review-name { font-weight: 700; font-size: 14px; color: var(--text); }
+.review-location { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.review-source { margin-left: auto; font-size: 12px; color: var(--muted); font-weight: 600; }
+
+/* ── GALLERY ── */
+.gallery { background: var(--off); }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+.gallery-item {
+  border-radius: 10px; overflow: hidden;
+  background: var(--blue); aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px; position: relative;
+  transition: transform 0.3s;
+}
+.gallery-item:hover { transform: scale(1.02); }
+.gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 300px; }
+.gallery-item:nth-child(1) { background: linear-gradient(135deg, var(--blue), #0d1f35); }
+.gallery-item:nth-child(2) { background: linear-gradient(135deg, #1a0a0a, var(--red-dark)); }
+.gallery-item:nth-child(3) { background: linear-gradient(135deg, #0d1f35, var(--blue-mid)); }
+.gallery-item:nth-child(4) { background: linear-gradient(135deg, var(--red-dark), #6a0a0a); }
+.gallery-item:nth-child(5) { background: linear-gradient(135deg, var(--blue-mid), var(--blue)); }
+.gallery-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  padding: 20px 16px 12px;
+  font-size: 13px; font-weight: 700; color: white;
+  letter-spacing: 0.5px;
+}
+
+/* ── SERVICE AREA ── */
+.service-area { background: var(--blue); }
+.service-area .section-title { color: white; }
+.service-area .section-label { color: var(--red-light); }
+.service-area .section-sub { color: rgba(255,255,255,0.6); }
+.areas-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px; margin-top: 40px;
+}
+.area-item {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px; padding: 12px 16px;
+  font-size: 14px; font-weight: 600; color: white;
+  display: flex; align-items: center; gap: 8px;
+  transition: background 0.2s;
+}
+.area-item:hover { background: rgba(255,255,255,0.15); }
+.area-item::before { content: '📍'; font-size: 14px; }
+
+/* ── FAQ ── */
+.faq { background: white; }
+.faq-list { max-width: 800px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid #E2E6EA; border-radius: 10px;
+  margin-bottom: 10px; overflow: hidden;
+}
+.faq-q {
+  padding: 18px 20px; font-weight: 700; font-size: 15px;
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; color: var(--text); transition: background 0.2s;
+  font-family: 'Barlow Condensed', sans-serif; font-size: 17px; letter-spacing: 0.3px;
+}
+.faq-q:hover { background: var(--off); }
+.faq-q.open { background: var(--blue); color: white; }
+.faq-icon { font-size: 20px; transition: transform 0.3s; flex-shrink: 0; margin-left: 12px; }
+.faq-q.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  padding: 0 20px; max-height: 0; overflow: hidden;
+  transition: all 0.3s; font-size: 15px; color: var(--muted); line-height: 1.7;
+}
+.faq-a.open { padding: 16px 20px; max-height: 300px; }
+
+/* ── CTA STRIP ── */
+.cta-strip {
+  background: var(--red); padding: 60px 0;
+  text-align: center; position: relative; overflow: hidden;
+}
+.cta-strip::before {
+  content: 'CALL NOW';
+  position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 200px;
+  color: rgba(255,255,255,0.05); letter-spacing: 10px;
+  white-space: nowrap; pointer-events: none;
+}
+.cta-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 5vw, 56px);
+  color: white; letter-spacing: 3px; margin-bottom: 12px;
+}
+.cta-sub { font-size: 18px; color: rgba(255,255,255,0.8); margin-bottom: 32px; }
+.cta-phone {
+  display: inline-block; font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 6vw, 72px); color: white; letter-spacing: 4px;
+  text-decoration: none; transition: all 0.2s;
+}
+.cta-phone:hover { color: rgba(255,255,255,0.8); transform: scale(1.02); }
+
+/* ── FOOTER ── */
+footer {
+  background: #0a1929; padding: 60px 0 0;
+  color: rgba(255,255,255,0.6);
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px; margin-bottom: 40px;
+}
+.footer-brand-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  color: white; letter-spacing: 2px; margin-bottom: 8px;
+}
+.footer-brand-name span { color: var(--red-light); }
+.footer-brand-desc { font-size: 14px; line-height: 1.7; margin-bottom: 20px; }
+.footer-contact-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; margin-bottom: 10px;
+}
+.footer-contact-item span { color: var(--red-light); flex-shrink: 0; }
+.footer-col-title {
+  font-family: 'Barlow Condensed', sans-serif; font-size: 16px;
+  font-weight: 700; color: white; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 16px;
+  padding-bottom: 8px; border-bottom: 2px solid var(--red);
+}
+.footer-link {
+  display: block; color: rgba(255,255,255,0.6); text-decoration: none;
+  font-size: 14px; margin-bottom: 8px; transition: color 0.2s;
+}
+.footer-link:hover { color: white; }
+.footer-hours-item {
+  display: flex; justify-content: space-between;
+  font-size: 13px; padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.footer-hours-item span:last-child { color: white; font-weight: 600; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 20px 24px; text-align: center;
+  font-size: 13px; color: rgba(255,255,255,0.3);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 8px;
+}
+.footer-badges { display: flex; gap: 12px; }
+.footer-badge {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.5); font-size: 11px; font-weight: 700;
+  padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-card { display: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-item:nth-child(1) { grid-column: span 2; }
+  nav { display: none; }
+  .mobile-menu-btn { display: block; }
+}
+@media (max-width: 600px) {
+  .hero-title { font-size: 52px; }
+  .hero-btns { flex-direction: column; }
+  .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-item:nth-child(1) { grid-column: span 2; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-top">
+    🔧 24/7 Emergency Plumbing — Salt Lake City & Surrounding Areas &nbsp;|&nbsp;
+    <a href="tel:8014068585">📞 (801) 406-8585</a>
+  </div>
+  <div class="header-main">
+    <div class="logo-wrap">
+      <div class="logo-icon">🔧</div>
+      <div class="logo-text">
+        <div class="logo-name">Charlie's <span>Plumbing</span></div>
+        <div class="logo-tag">& Drain Cleaning · Salt Lake City, UT</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#service-area">Service Area</a>
+      <a href="#faq">FAQ</a>
+      <a href="tel:8014068585" class="nav-cta">📞 (801) 406-8585</a>
+    </nav>
+    <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-stripe"></div>
+  <div class="hero-content">
+    <div>
+      <div class="hero-badge">● Available 24/7 — Emergency Service</div>
+      <h1 class="hero-title">
+        Salt Lake's
+        <span>Trusted</span>
+        Plumbers
+      </h1>
+      <p class="hero-sub">
+        Fast, reliable plumbing repair and installation across Salt Lake City and the Wasatch Front. Licensed, insured, and backed by a 100% satisfaction guarantee.
+      </p>
+      <div class="hero-btns">
+        <a href="tel:8014068585" class="btn-hero-primary">📞 Call (801) 406-8585</a>
+        <a href="#book" class="btn-hero-secondary">📅 Book Online</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><span>⭐</span> 4.9 Star Rating</div>
+        <div class="hero-trust-item"><span>✓</span> Licensed & Insured</div>
+        <div class="hero-trust-item"><span>🔧</span> 15+ Years Experience</div>
+        <div class="hero-trust-item"><span>⚡</span> Same-Day Service</div>
+      </div>
+    </div>
+    <div class="hero-card" id="book">
+      <div class="hero-card-title">Book a Service Call</div>
+      <div class="hero-card-sub">We'll confirm your appointment within 30 minutes.</div>
+      <form onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="John" required>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Smith" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="(801) 555-0100" required>
+        </div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select required>
+            <option value="">Select a service...</option>
+            <option>Drain Cleaning</option>
+            <option>Water Heater Repair/Replace</option>
+            <option>Sewer Line Repair</option>
+            <option>Leak Detection & Repair</option>
+            <option>Toilet Repair/Replace</option>
+            <option>Water Softener</option>
+            <option>Emergency Plumbing</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Address</label>
+          <input type="text" placeholder="123 Main St, Salt Lake City, UT" required>
+        </div>
+        <div class="form-group">
+          <label>Describe the Issue</label>
+          <textarea placeholder="Tell us what's going on..."></textarea>
+        </div>
+        <button type="submit" class="btn-form">Request Service →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item"><span class="trust-item-icon">🏆</span> Licensed Master Plumbers</div>
+    <div class="trust-item"><span class="trust-item-icon">🛡️</span> Fully Insured & Bonded</div>
+    <div class="trust-item"><span class="trust-item-icon">⚡</span> Same-Day Availability</div>
+    <div class="trust-item"><span class="trust-item-icon">💯</span> Satisfaction Guaranteed</div>
+    <div class="trust-item"><span class="trust-item-icon">🕐</span> 24/7 Emergency Service</div>
+    <div class="trust-item"><span class="trust-item-icon">⭐</span> 500+ 5-Star Reviews</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">What We Do</div>
+      <div class="section-title">Plumbing Services</div>
+      <p class="section-sub">From routine maintenance to emergency repairs — we handle every plumbing need across the Wasatch Front.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">🚿</div>
+        <div class="service-name">Drain Cleaning</div>
+        <p class="service-desc">Clogged drains cleared fast. Kitchen, bathroom, floor drains, and main sewer lines. Hydro-jetting available.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔥</div>
+        <div class="service-name">Water Heater Repair & Replacement</div>
+        <p class="service-desc">Traditional and tankless water heater service. Fast installation with same-day availability on most units.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🏗️</div>
+        <div class="service-name">Sewer Line Repair</div>
+        <p class="service-desc">Camera inspection, hydro-jetting, spot repairs, and full sewer line replacement. We find the problem fast.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💧</div>
+        <div class="service-name">Leak Detection & Repair</div>
+        <p class="service-desc">Electronic leak detection to find hidden leaks without tearing up your home. Fixed right the first time.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🚽</div>
+        <div class="service-name">Toilet Repair & Replacement</div>
+        <p class="service-desc">Running toilets, clogs, cracks, and full replacements. We stock popular models for same-day install.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💎</div>
+        <div class="service-name">Water Softeners</div>
+        <p class="service-desc">Salt Lake City's hard water is tough on pipes and appliances. We install and service whole-home water softeners.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🔧</div>
+        <div class="service-name">General Plumbing Repairs</div>
+        <p class="service-desc">Faucets, valves, garbage disposals, pipe repairs, repiping — if it involves water, we fix it.</p>
+        <a href="tel:8014068585" class="service-link">Schedule Now →</a>
+      </div>
+      <div class="service-card reveal" style="background:var(--red);border-color:var(--red)">
+        <div class="service-icon" style="background:rgba(255,255,255,0.2)">🚨</div>
+        <div class="service-name" style="color:white">24/7 Emergency Plumbing</div>
+        <p class="service-desc" style="color:rgba(255,255,255,0.8)">Burst pipes, sewage backup, flooding — we respond fast. Emergency techs standing by around the clock.</p>
+        <a href="tel:8014068585" class="service-link" style="color:white">Call Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-us">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Why Charlie's</div>
+      <div class="section-title">The Charlie's Difference</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <div class="why-title">Upfront Pricing</div>
+        <p class="why-desc">No surprise charges. You get a clear price before we start any work — guaranteed.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <div class="why-title">Same-Day Service</div>
+        <p class="why-desc">We know plumbing problems can't wait. We offer same-day appointments 7 days a week.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <div class="why-title">Background-Checked Techs</div>
+        <p class="why-desc">Every technician is licensed, insured, and background checked. You can trust who's in your home.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <div class="why-title">100% Satisfaction</div>
+        <p class="why-desc">If you're not happy, we make it right. No questions asked. That's our promise to every customer.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">05</div>
+        <div class="why-title">Local & Family Owned</div>
+        <p class="why-desc">We're your neighbors. Utah-owned and operated, serving the Wasatch Front for over 15 years.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">06</div>
+        <div class="why-title">AI-Powered Booking</div>
+        <p class="why-desc">Book 24/7 by calling our number. Our AI receptionist answers instantly and schedules your appointment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Customer Reviews</div>
+      <div class="section-title">What Our Customers Say</div>
+      <p class="section-sub">Over 500 five-star reviews across Google and Yelp from homeowners across the Wasatch Front.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Called at 7am with a burst pipe and they had a tech out by 9. Fixed everything quickly and the price was exactly what they quoted. Will never use anyone else."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#C0392B">MT</div>
+          <div><div class="review-name">Mike T.</div><div class="review-location">Salt Lake City, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Jake came out and fixed our water heater the same day I called. He was professional, fast, and explained everything. Highly recommend Charlie's to anyone in the area."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#1A3A5C">SJ</div>
+          <div><div class="review-name">Sandra J.</div><div class="review-location">Orem, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Had a sewer backup on a Sunday evening. Charlie's picked up immediately and had someone out within 2 hours. Problem solved, mess cleaned up. Absolute lifesavers."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#27AE60">RL</div>
+          <div><div class="review-name">Roy L.</div><div class="review-location">Murray, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Great pricing, showed up on time, did excellent work. The tech even noticed a small leak under my sink that wasn't part of the job and fixed it at no charge. Incredible service."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#8E44AD">KW</div>
+          <div><div class="review-name">Karen W.</div><div class="review-location">Sandy, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"I've used Charlie's three times now for different issues. Every single time — on time, professional, and fair price. This is the only plumber I'll ever call in Salt Lake."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#E67E22">DH</div>
+          <div><div class="review-name">Dave H.</div><div class="review-location">Draper, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Booked using their AI phone system at midnight when our pipe burst — it was impressive. Got a confirmation text immediately and a tech was there first thing in the morning. Amazing."</p>
+        <div class="review-author">
+          <div class="review-avatar" style="background:#16A085">TN</div>
+          <div><div class="review-name">Tina N.</div><div class="review-location">West Jordan, UT</div></div>
+          <div class="review-source">Google ⭐</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Our Work</div>
+      <div class="section-title">Recent Projects</div>
+      <p class="section-sub">From emergency repairs to full installations — quality work on every job.</p>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item">🔧<div class="gallery-label">Water Heater Installation — Provo</div></div>
+      <div class="gallery-item">🚿<div class="gallery-label">Drain Cleaning — SLC</div></div>
+      <div class="gallery-item">🏗️<div class="gallery-label">Sewer Line Repair — Murray</div></div>
+      <div class="gallery-item">💧<div class="gallery-label">Leak Detection — Sandy</div></div>
+      <div class="gallery-item">💎<div class="gallery-label">Water Softener Install — Orem</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREA -->
+<section class="service-area" id="service-area">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Where We Work</div>
+      <div class="section-title">Service Area</div>
+      <p class="section-sub">We serve the entire Wasatch Front — from Ogden to Provo and everywhere in between.</p>
+    </div>
+    <div class="areas-grid reveal">
+      <div class="area-item">Salt Lake City</div>
+      <div class="area-item">West Valley City</div>
+      <div class="area-item">Provo</div>
+      <div class="area-item">West Jordan</div>
+      <div class="area-item">Orem</div>
+      <div class="area-item">Sandy</div>
+      <div class="area-item">Ogden</div>
+      <div class="area-item">St. George</div>
+      <div class="area-item">Layton</div>
+      <div class="area-item">South Jordan</div>
+      <div class="area-item">Taylorsville</div>
+      <div class="area-item">Murray</div>
+      <div class="area-item">Draper</div>
+      <div class="area-item">Lehi</div>
+      <div class="area-item">Riverton</div>
+      <div class="area-item">American Fork</div>
+      <div class="area-item">Herriman</div>
+      <div class="area-item">Magna</div>
+      <div class="area-item">Midvale</div>
+      <div class="area-item">Cottonwood Heights</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Common Questions</div>
+      <div class="section-title">Frequently Asked Questions</div>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer same-day service? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes — we offer same-day service 7 days a week, including weekends and holidays. For emergency situations like burst pipes or sewage backups, we have technicians on call 24 hours a day. Call us at (801) 406-8585 and we'll get someone out as fast as possible.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How does your pricing work? <span class="faq-icon">+</span></div>
+        <div class="faq-a">We believe in upfront, transparent pricing. Before any work begins, your technician will assess the situation and provide a clear, flat-rate quote. You approve the price before we start — no surprises on the final bill, ever.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Are your plumbers licensed and insured? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Absolutely. All of our technicians hold valid Utah plumbing licenses, are fully insured and bonded, and have passed background checks. You can trust who you're letting into your home.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What areas do you serve? <span class="faq-icon">+</span></div>
+        <div class="faq-a">We serve the entire Wasatch Front including Salt Lake City, West Valley, Provo, Orem, Sandy, Murray, Draper, West Jordan, South Jordan, Lehi, American Fork, Taylorsville, Midvale, and surrounding areas. Not sure if you're in our service area? Just call us and we'll let you know.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Can I book online or after hours? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes! Our AI receptionist answers calls 24/7, even after business hours. You can call (801) 406-8585 any time of day or night and our system will gather your information and schedule your appointment. You'll receive a confirmation text immediately.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Do you offer a warranty on your work? <span class="faq-icon">+</span></div>
+        <div class="faq-a">Yes. All of our labor is backed by a satisfaction guarantee. If something isn't right after we've completed a job, call us and we'll come back and make it right at no charge. We stand behind every service call.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">How do I know if I need drain cleaning vs sewer repair? <span class="faq-icon">+</span></div>
+        <div class="faq-a">If you have one slow drain, it's likely a local clog that drain cleaning can fix. If multiple drains are slow or backing up, or if you notice gurgling sounds, sewage smells, or wet spots in your yard, you may have a main sewer line issue. Our technicians can run a camera inspection to diagnose the problem accurately.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">What should I do in a plumbing emergency? <span class="faq-icon">+</span></div>
+        <div class="faq-a">First, locate your main water shut-off valve and turn off the water supply to stop flooding. Then call us immediately at (801) 406-8585 — we have emergency technicians available 24/7. Don't attempt major repairs yourself as this can cause additional damage.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="container">
+    <div class="cta-title">Ready to Get Started?</div>
+    <p class="cta-sub">Call now or book online — we'll confirm within 30 minutes.</p>
+    <a href="tel:8014068585" class="cta-phone">(801) 406-8585</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Charlie's <span>Plumbing</span></div>
+        <p class="footer-brand-desc">Salt Lake City's trusted plumbing experts. Licensed, insured, and committed to delivering honest, reliable service to every home and business we serve.</p>
+        <div class="footer-contact-item"><span>📞</span><a href="tel:8014068585" style="color:rgba(255,255,255,0.6);text-decoration:none">(801) 406-8585</a></div>
+        <div class="footer-contact-item"><span>📍</span>Salt Lake City, Utah</div>
+        <div class="footer-contact-item"><span>✉️</span>info@charliesplumbing.com</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <a href="#services" class="footer-link">Drain Cleaning</a>
+        <a href="#services" class="footer-link">Water Heaters</a>
+        <a href="#services" class="footer-link">Sewer Repair</a>
+        <a href="#services" class="footer-link">Leak Detection</a>
+        <a href="#services" class="footer-link">Water Softeners</a>
+        <a href="#services" class="footer-link">Emergency Service</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <a href="#" class="footer-link">About Us</a>
+        <a href="#reviews" class="footer-link">Reviews</a>
+        <a href="#service-area" class="footer-link">Service Area</a>
+        <a href="#faq" class="footer-link">FAQ</a>
+        <a href="#" class="footer-link">Careers</a>
+        <a href="#" class="footer-link">Contact</a>
+      </div>
+      <div>
+        <div class="footer-col-title">Hours</div>
+        <div class="footer-hours-item"><span>Mon – Fri</span><span>7AM – 7PM</span></div>
+        <div class="footer-hours-item"><span>Saturday</span><span>8AM – 5PM</span></div>
+        <div class="footer-hours-item"><span>Sunday</span><span>On Call</span></div>
+        <div class="footer-hours-item" style="border:none;margin-top:8px"><span style="color:var(--red-light);font-weight:700">Emergency</span><span>24/7</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Charlie's Plumbing & Drain Cleaning. All rights reserved.</span>
+    <div class="footer-badges">
+      <span class="footer-badge">Licensed</span>
+      <span class="footer-badge">Insured</span>
+      <span class="footer-badge">BBB Accredited</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Sticky header
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// FAQ accordion
+function toggleFaq(el) {
+  const answer = el.nextElementSibling;
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+  if (!isOpen) { el.classList.add('open'); answer.classList.add('open'); }
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Mobile menu
+function toggleMenu() {
+  const nav = document.querySelector('nav');
+  if (nav.style.display === 'flex') {
+    nav.style.display = '';
+  } else {
+    nav.style.display = 'flex';
+    nav.style.flexDirection = 'column';
+    nav.style.position = 'fixed';
+    nav.style.top = '110px';
+    nav.style.left = '0';
+    nav.style.right = '0';
+    nav.style.background = 'var(--blue)';
+    nav.style.padding = '20px';
+    nav.style.gap = '8px';
+    nav.style.zIndex = '99';
+  }
+}
+
+// Form submit
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.btn-form');
+  btn.textContent = '✓ Request Submitted!';
+  btn.style.background = '#27AE60';
+  setTimeout(() => { btn.textContent = 'Request Service →'; btn.style.background = ''; e.target.reset(); }, 3000);
+}
+</script>
+</body>
+</html>
