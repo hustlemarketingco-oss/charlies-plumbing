@@ -1531,14 +1531,12 @@ async function sendMessage() {
           content: [{ type: 'tool_result', tool_use_id: block.id, content: JSON.stringify({ success: true, booking_id: booking?.id }) }]
         });
 
-        const followUp = await fetch('https://api.anthropic.com/v1/messages', {
+        const followUp = await fetch('https://charlies-plumbing-voice-production.up.railway.app/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            model: 'claude-haiku-4-5-20251001',
-            max_tokens: 300,
-            system: SYSTEM_PROMPT,
             messages: conversationHistory,
+            system: SYSTEM_PROMPT,
           }),
         });
         const followData = await followUp.json();
