@@ -1864,7 +1864,8 @@ function bwSubmit(){
 // ── WEBCHAT ───────────────────────────────────────────────────────────────────
 var cpOpen_state=false,cpHistory=[],cpBookingStarted=false;
 var CHAT_URL='https://charlies-plumbing-voice-production.up.railway.app/chat';
-var CP_SYSTEM='You are Aria, the friendly AI assistant for Charlie\'s Plumbing & Drain Cleaning in Salt Lake City, Utah. You help website visitors by answering questions and helping them book service appointments.\n\nSERVICES: Drain cleaning, water heater repair/replacement, sewer repair, leak detection, toilet service, water softeners, general plumbing, 24/7 emergency.\n\nPRICING (say "starting from"): Drain cleaning from $89, water heater replacement from $800, sewer inspection from $149.\n\nSERVICE AREA: Salt Lake City, West Valley, Provo, Orem, Sandy, Murray, Draper, West Jordan, South Jordan, Lehi, American Fork, Taylorsville, Midvale, and surrounding Utah areas.\n\nHOURS: Mon-Fri 7AM-7PM, Sat 8AM-5PM, Sun on-call. Emergency 24/7.\n\nIMPORTANT: When someone wants to book an appointment, instead of collecting info through chat, tell them you\'ll open the booking wizard for the best experience and use the launch_booking_wizard tool. This gives them the full 5-step scheduling experience.\n\nFor general questions, answer directly and helpfully. Keep responses concise — this is a chat widget.';
+var CP_SYSTEM='You are Aria, the AI assistant for Charlie\'s Plumbing. Keep all answers to 1-2 sentences. CRITICAL RULE: NEVER collect booking info in chat. NEVER ask for name, phone, address, or service in chat. If the user mentions booking, scheduling, appointment, or service — respond ONLY with \"I\'ll open our booking wizard for you!\" and use the launch_booking_wizard tool immediately. Do not ask anything first. Just launch it. Pricing: drain cleaning from $89, water heaters from $800, sewer inspection from $149. Hours: Mon-Fri 7AM-7PM, Sat 8AM-5PM, emergency 24\/7. Service area: Salt Lake City metro and Wasatch Front.';\
+
 
 window.cpToggle=function(){cpOpen_state?cpClose():cpOpen();};
 window.cpOpen=function(){
@@ -1874,7 +1875,7 @@ window.cpOpen=function(){
   document.getElementById('cp-close-icon').style.display='block';
   document.getElementById('cp-greeting').style.display='none';
   document.getElementById('cp-badge').style.display='none';
-  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['Book an appointment','Pricing info','Service area?','Emergency help']);},300);}
+  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['📅 Book appointment','Pricing info','Service area?','Emergency help']);},300);}
   document.getElementById('cp-input').focus();
 };
 window.cpClose=function(){
@@ -1906,7 +1907,15 @@ function cpShowTyping(){
 function cpRemoveTyping(){var e=document.getElementById('cp-typ');if(e)e.remove();}
 function cpShowQuick(opts){
   var c=document.getElementById('cp-quick');c.innerHTML='';
-  opts.forEach(function(o){var b=document.createElement('button');b.className='cpqb';b.textContent=o;b.onclick=function(){document.getElementById('cp-input').value=o;cpSend();};c.appendChild(b);});
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.className='cpqb';b.textContent=o;
+    b.onclick=function(){
+      if(o.indexOf('wizard')>=0||o.indexOf('Book')>=0||o.indexOf('book')>=0||o.indexOf('Schedule')>=0){cpLaunchWizard();return;}
+      if(o.indexOf('Call (801)')>=0){window.open('tel:8014068585');return;}
+      document.getElementById('cp-input').value=o;cpSend();
+    };
+    c.appendChild(b);
+  });
 }
 function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
 
@@ -1928,13 +1937,13 @@ window.cpSend=function(){
     if(text){cpHistory.push({role:'assistant',content:text});cpAddMsg('bot',text);}
     if(launched){
       cpShowBookBar(true);
-      cpShowQuick(['Open booking wizard','Call instead']);
+      cpShowQuick(['📅 Open booking wizard','Call instead']);
     } else if(text.toLowerCase().indexOf('book')>=0||text.toLowerCase().indexOf('schedule')>=0||text.toLowerCase().indexOf('appointment')>=0){
       cpShowBookBar(true);
-      cpShowQuick(['Open booking wizard','More questions']);
+      cpShowQuick(['📅 Open booking wizard','More questions']);
     } else {
       cpShowBookBar(false);
-      cpShowQuick(['Book an appointment','Pricing info','Call (801) 406-8585']);
+      cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
     }
   }).catch(function(err){
     cpRemoveTyping();
@@ -2208,7 +2217,8 @@ function bwSubmit(){
 // ── WEBCHAT ───────────────────────────────────────────────────────────────────
 var cpOpen_state=false,cpHistory=[],cpBookingStarted=false;
 var CHAT_URL='https://charlies-plumbing-voice-production.up.railway.app/chat';
-var CP_SYSTEM='You are Aria, the friendly AI assistant for Charlie\'s Plumbing & Drain Cleaning in Salt Lake City, Utah. You help website visitors by answering questions and helping them book service appointments.\n\nSERVICES: Drain cleaning, water heater repair/replacement, sewer repair, leak detection, toilet service, water softeners, general plumbing, 24/7 emergency.\n\nPRICING (say "starting from"): Drain cleaning from $89, water heater replacement from $800, sewer inspection from $149.\n\nSERVICE AREA: Salt Lake City, West Valley, Provo, Orem, Sandy, Murray, Draper, West Jordan, South Jordan, Lehi, American Fork, Taylorsville, Midvale, and surrounding Utah areas.\n\nHOURS: Mon-Fri 7AM-7PM, Sat 8AM-5PM, Sun on-call. Emergency 24/7.\n\nIMPORTANT: When someone wants to book an appointment, instead of collecting info through chat, tell them you\'ll open the booking wizard for the best experience and use the launch_booking_wizard tool. This gives them the full 5-step scheduling experience.\n\nFor general questions, answer directly and helpfully. Keep responses concise — this is a chat widget.';
+var CP_SYSTEM='You are Aria, the AI assistant for Charlie\'s Plumbing. Keep all answers to 1-2 sentences. CRITICAL RULE: NEVER collect booking info in chat. NEVER ask for name, phone, address, or service in chat. If the user mentions booking, scheduling, appointment, or service — respond ONLY with \"I\'ll open our booking wizard for you!\" and use the launch_booking_wizard tool immediately. Do not ask anything first. Just launch it. Pricing: drain cleaning from $89, water heaters from $800, sewer inspection from $149. Hours: Mon-Fri 7AM-7PM, Sat 8AM-5PM, emergency 24\/7. Service area: Salt Lake City metro and Wasatch Front.';\
+
 
 window.cpToggle=function(){cpOpen_state?cpClose():cpOpen();};
 window.cpOpen=function(){
@@ -2218,7 +2228,7 @@ window.cpOpen=function(){
   document.getElementById('cp-close-icon').style.display='block';
   document.getElementById('cp-greeting').style.display='none';
   document.getElementById('cp-badge').style.display='none';
-  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['Book an appointment','Pricing info','Service area?','Emergency help']);},300);}
+  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['📅 Book appointment','Pricing info','Service area?','Emergency help']);},300);}
   document.getElementById('cp-input').focus();
 };
 window.cpClose=function(){
@@ -2250,7 +2260,15 @@ function cpShowTyping(){
 function cpRemoveTyping(){var e=document.getElementById('cp-typ');if(e)e.remove();}
 function cpShowQuick(opts){
   var c=document.getElementById('cp-quick');c.innerHTML='';
-  opts.forEach(function(o){var b=document.createElement('button');b.className='cpqb';b.textContent=o;b.onclick=function(){document.getElementById('cp-input').value=o;cpSend();};c.appendChild(b);});
+  opts.forEach(function(o){
+    var b=document.createElement('button');b.className='cpqb';b.textContent=o;
+    b.onclick=function(){
+      if(o.indexOf('wizard')>=0||o.indexOf('Book')>=0||o.indexOf('book')>=0||o.indexOf('Schedule')>=0){cpLaunchWizard();return;}
+      if(o.indexOf('Call (801)')>=0){window.open('tel:8014068585');return;}
+      document.getElementById('cp-input').value=o;cpSend();
+    };
+    c.appendChild(b);
+  });
 }
 function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
 
@@ -2272,13 +2290,13 @@ window.cpSend=function(){
     if(text){cpHistory.push({role:'assistant',content:text});cpAddMsg('bot',text);}
     if(launched){
       cpShowBookBar(true);
-      cpShowQuick(['Open booking wizard','Call instead']);
+      cpShowQuick(['📅 Open booking wizard','Call instead']);
     } else if(text.toLowerCase().indexOf('book')>=0||text.toLowerCase().indexOf('schedule')>=0||text.toLowerCase().indexOf('appointment')>=0){
       cpShowBookBar(true);
-      cpShowQuick(['Open booking wizard','More questions']);
+      cpShowQuick(['📅 Open booking wizard','More questions']);
     } else {
       cpShowBookBar(false);
-      cpShowQuick(['Book an appointment','Pricing info','Call (801) 406-8585']);
+      cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
     }
   }).catch(function(err){
     cpRemoveTyping();
