@@ -837,7 +837,7 @@ footer {
     <div class="cta-title">Ready to Get Started?</div>
     <p class="cta-sub">Call now or book online — we'll confirm within 30 minutes.</p>
     <a href="tel:8014068585" class="cta-phone">(801) 406-8585</a>
-    <div style="margin-top:20px"><button onclick="openWizard()" style="background:white;color:#C0392B;border:none;padding:14px 32px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:Barlow Condensed,sans-serif;letter-spacing:0.5px">📅 Book Online Now</button></div>
+    <div style="margin-top:20px"><button onclick="openWizard()" style="background:white;color:#C0392B;border:none;padding:14px 32px;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;font-family:Barlow Condensed,sans-serif">📅 Book Online Now</button></div>
   </div>
 </div>
 
@@ -928,7 +928,7 @@ function toggleMenu() {
   }
 }
 
-// Form handled by wizard
+
 </script>
 <!DOCTYPE html>
 <html lang="en">
@@ -1603,33 +1603,32 @@ init();
   </div>
 </div>
 
-
-<!-- BOOKING WIZARD MODAL -->
-<div id="bw-overlay" onclick="if(event.target===this)closeWizard()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:16px">
+<!-- BOOKING WIZARD MODAL (single instance) -->
+<div id="bw-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:16px">
   <div style="background:#fff;border-radius:16px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.3)">
     <div style="background:#1A3A5C;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;border-bottom:3px solid #C0392B;position:sticky;top:0;z-index:1">
       <div>
         <div style="color:#fff;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.6;margin-bottom:2px">Charlie's Plumbing &amp; Drain Cleaning</div>
         <div style="color:#fff;font-size:18px;font-weight:600">Book online now</div>
       </div>
-      <button onclick="closeWizard()" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center">&#x2715;</button>
+      <button id="bw-x" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center">&#x2715;</button>
     </div>
     <div id="bw-prog" style="display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid #E2E6EA;background:#F8F9FA"></div>
     <div id="bw-body" style="padding:24px 20px;min-height:280px"></div>
     <div style="padding:14px 20px;border-top:1px solid #E2E6EA;display:flex;justify-content:space-between;align-items:center;background:#F8F9FA;border-radius:0 0 16px 16px;position:sticky;bottom:0">
-      <button id="bw-back" onclick="prevStep()" style="display:none;padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #E2E6EA;background:#fff;color:#2C3E50;font-family:Barlow,sans-serif">&#8592; Back</button>
+      <button id="bw-back" style="display:none;padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #E2E6EA;background:#fff;color:#2C3E50;font-family:Barlow,sans-serif">&#8592; Back</button>
       <div style="font-size:12px;color:#7F8C8D" id="bw-lbl">Step 1 of 5</div>
-      <button id="bw-next" onclick="nextStep()" style="padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#C0392B;color:#fff;font-family:Barlow,sans-serif">Continue &#8594;</button>
+      <button id="bw-next" style="padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#C0392B;color:#fff;font-family:Barlow,sans-serif">Continue &#8594;</button>
     </div>
   </div>
 </div>
 
-<!-- IMPROVED WEBCHAT WIDGET -->
-<div id="cp-chat-widget" style="position:fixed;bottom:24px;right:24px;z-index:9998;font-family:Barlow,sans-serif">
-  <div id="cp-greeting" onclick="cpOpen()" style="display:none;position:absolute;bottom:76px;right:0;background:white;border-radius:16px 16px 4px 16px;padding:12px 16px;box-shadow:0 4px 16px rgba(0,0,0,0.15);font-size:14px;color:#2C3E50;max-width:260px;line-height:1.5;cursor:pointer;border:1px solid #E2E6EA">
-    👋 Hi! I'm <strong style="color:#C0392B">Aria</strong>, Charlie's AI assistant.<br>Need a plumber? I can book your appointment right now!
+<!-- WEBCHAT WIDGET (single instance) -->
+<div id="cp-widget" style="position:fixed;bottom:24px;right:24px;z-index:9998;font-family:Barlow,sans-serif">
+  <div id="cp-greet" style="display:none;position:absolute;bottom:76px;right:0;background:white;border-radius:16px 16px 4px 16px;padding:12px 16px;box-shadow:0 4px 16px rgba(0,0,0,0.15);font-size:14px;color:#2C3E50;max-width:260px;line-height:1.5;cursor:pointer;border:1px solid #E2E6EA">
+    👋 Hi! I'm <strong style="color:#C0392B">Aria</strong>, Charlie's AI assistant.<br>Need a plumber? Click to chat!
   </div>
-  <div id="cp-window" style="display:none;position:absolute;bottom:76px;right:0;width:360px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 120px);background:white;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.2);flex-direction:column;overflow:hidden">
+  <div id="cp-win" style="display:none;position:absolute;bottom:76px;right:0;width:360px;max-width:calc(100vw - 32px);height:520px;max-height:calc(100vh - 120px);background:white;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.2);flex-direction:column;overflow:hidden">
     <div style="background:linear-gradient(135deg,#1A3A5C,#0d1f35);padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid #C0392B;flex-shrink:0">
       <div style="width:38px;height:38px;background:#C0392B;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🔧</div>
       <div style="flex:1">
@@ -1640,41 +1639,41 @@ init();
     </div>
     <div id="cp-msgs" style="flex:1;overflow-y:auto;padding:14px;background:#F7F8FA;display:flex;flex-direction:column;gap:8px"></div>
     <div id="cp-quick" style="padding:8px 14px;display:flex;flex-wrap:wrap;gap:6px;background:#F7F8FA;border-top:1px solid #E2E6EA;flex-shrink:0"></div>
-    <div id="cp-book-bar" style="display:none;padding:10px 14px;background:#1A3A5C;flex-shrink:0">
-      <button onclick="cpLaunchWizard()" style="width:100%;padding:10px;background:#C0392B;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:Barlow,sans-serif;letter-spacing:0.3px">📅 Open Booking Wizard</button>
+    <div id="cp-bookbar" style="display:none;padding:10px 14px;background:#1A3A5C;flex-shrink:0">
+      <button id="cp-bookbtn" style="width:100%;padding:10px;background:#C0392B;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:Barlow,sans-serif">📅 Open Booking Wizard</button>
     </div>
     <div style="padding:10px 14px;border-top:1px solid #E2E6EA;display:flex;gap:8px;background:white;flex-shrink:0">
-      <input id="cp-input" type="text" placeholder="Type a message..." style="flex:1;border:1px solid #E2E6EA;border-radius:24px;padding:9px 16px;font-size:13px;font-family:Barlow,sans-serif;outline:none;background:#F7F8FA" onkeypress="if(event.key==='Enter')cpSend()">
-      <button onclick="cpSend()" style="width:38px;height:38px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <input id="cp-inp" type="text" placeholder="Type a message..." style="flex:1;border:1px solid #E2E6EA;border-radius:24px;padding:9px 16px;font-size:13px;font-family:Barlow,sans-serif;outline:none;background:#F7F8FA">
+      <button id="cp-sendbtn" style="width:38px;height:38px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
         <svg fill="white" width="16" height="16" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
     <div style="text-align:center;padding:5px;font-size:10px;color:#B0BEC5;background:white;flex-shrink:0">Powered by Aria AI &middot; (801) 406-8585</div>
   </div>
-  <button id="cp-btn" onclick="cpToggle()" style="width:58px;height:58px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(192,57,43,0.4);position:relative;transition:all 0.3s">
+  <button id="cp-btn" style="width:58px;height:58px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(192,57,43,0.4);position:relative">
     <span id="cp-badge" style="position:absolute;top:-4px;right:-4px;width:20px;height:20px;background:#F39C12;border-radius:50%;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">1</span>
-    <svg id="cp-chat-icon" width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    <svg id="cp-close-icon" width="22" height="22" fill="white" viewBox="0 0 24 24" style="display:none"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    <svg id="cp-icon1" width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    <svg id="cp-icon2" width="22" height="22" fill="white" viewBox="0 0 24 24" style="display:none"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
   </button>
 </div>
 
 <style>
-/* Wizard styles */
+/* Wizard */
 .bws{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative}
 .bws:not(:last-child)::after{content:'';position:absolute;top:14px;left:60%;width:80%;height:1.5px;background:#E2E6EA}
 .bws.done:not(:last-child)::after{background:#C0392B}
 .bwd{width:28px;height:28px;border-radius:50%;border:1.5px solid #E2E6EA;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#7F8C8D;background:#fff;transition:all .25s;z-index:1}
 .bws.active .bwd{background:#1A3A5C;border-color:#1A3A5C;color:#fff}
 .bws.done .bwd{background:#C0392B;border-color:#C0392B;color:#fff}
-.bwsl{font-size:10px;color:#7F8C8D;font-weight:600;font-family:Barlow,sans-serif}
+.bwsl{font-size:10px;color:#7F8C8D;font-weight:600}
 .bws.active .bwsl{color:#1A3A5C}
 .bwinp{width:100%;padding:11px 14px;border:1px solid #E2E6EA;border-radius:8px;font-size:14px;font-family:Barlow,sans-serif;color:#2C3E50;background:#fff;outline:none;box-sizing:border-box;transition:border-color .2s}
 .bwinp:focus{border-color:#1A3A5C}
 .bwinp.bwerr{border-color:#C0392B}
-.bwta{width:100%;padding:11px 14px;border:1px solid #E2E6EA;border-radius:8px;font-size:14px;font-family:Barlow,sans-serif;color:#2C3E50;background:#fff;outline:none;resize:vertical;min-height:80px;line-height:1.5;box-sizing:border-box;transition:border-color .2s}
+.bwta{width:100%;padding:11px 14px;border:1px solid #E2E6EA;border-radius:8px;font-size:14px;font-family:Barlow,sans-serif;color:#2C3E50;background:#fff;outline:none;resize:vertical;min-height:80px;line-height:1.5;box-sizing:border-box}
 .bwta:focus{border-color:#1A3A5C}
-.bwlbl{font-size:12px;font-weight:600;color:#7F8C8D;margin-bottom:6px;display:block;font-family:Barlow,sans-serif;text-transform:uppercase;letter-spacing:0.5px}
-.bwreq{color:#C0392B;margin-left:2px}
+.bwlbl{font-size:12px;font-weight:600;color:#7F8C8D;margin-bottom:6px;display:block;text-transform:uppercase;letter-spacing:0.5px}
+.bwreq{color:#C0392B}
 .bwfld{margin-bottom:14px}
 .bwr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .bwr3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
@@ -1689,26 +1688,24 @@ init();
 .bwtm{border:1.5px solid #E2E6EA;border-radius:8px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600;color:#2C3E50;transition:all .2s;font-family:Barlow,sans-serif}
 .bwtm:hover{border-color:#1A3A5C}
 .bwtm.sel{border-color:#C0392B;background:#fdf0ee;color:#C0392B}
-.bwcr{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E2E6EA;font-size:13px;gap:12px;font-family:Barlow,sans-serif}
+.bwcr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #E2E6EA;font-size:13px;gap:12px}
 .bwcr:last-child{border-bottom:none}
-.bwoptin{border:1px solid #E2E6EA;border-radius:8px;padding:14px;background:#F8F9FA;margin-top:4px}
-.bwcb{width:20px;height:20px;border:1.5px solid #E2E6EA;border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff;cursor:pointer}
+.bwcb{width:20px;height:20px;border:1.5px solid #E2E6EA;border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff;cursor:pointer}
 .bwcb.on{background:#1A3A5C;border-color:#1A3A5C}
-.bwem{font-size:11px;color:#C0392B;margin-top:3px;display:none;font-family:Barlow,sans-serif}
-.bwzr{font-size:13px;padding:8px 12px;border-radius:8px;margin-top:8px;display:none;font-family:Barlow,sans-serif}
+.bwem{font-size:11px;color:#C0392B;margin-top:3px;display:none}
+.bwzr{font-size:13px;padding:8px 12px;border-radius:8px;margin-top:8px;display:none}
 .bwzok{background:#eafaf1;color:#1E8449}
 .bwzno{background:#fdf0ee;color:#C0392B}
-/* Chat styles */
-.cpmsg{display:flex;gap:8px;max-width:90%;animation:cpin .25s ease}
-@keyframes cpin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+/* Chat */
+.cpmsg{display:flex;gap:8px;max-width:90%}
 .cpmsg.u{align-self:flex-end;flex-direction:row-reverse}
-.cpbub{background:white;border-radius:14px 14px 14px 4px;padding:9px 13px;font-size:13px;line-height:1.5;color:#2C3E50;box-shadow:0 1px 4px rgba(0,0,0,0.08);max-width:100%}
+.cpbub{background:white;border-radius:14px 14px 14px 4px;padding:9px 13px;font-size:13px;line-height:1.5;color:#2C3E50;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
 .cpmsg.u .cpbub{background:#1A3A5C;color:white;border-radius:14px 14px 4px 14px}
 .cpav{width:26px;height:26px;border-radius:50%;background:#1A3A5C;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
 .cpmsg.u .cpav{background:#C0392B}
-.cpqb{background:white;border:1.5px solid #1A3A5C;color:#1A3A5C;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:Barlow,sans-serif;white-space:nowrap}
+.cpqb{background:white;border:1.5px solid #1A3A5C;color:#1A3A5C;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:Barlow,sans-serif;white-space:nowrap}
 .cpqb:hover{background:#1A3A5C;color:white}
-.cptyp{display:flex;gap:4px;padding:9px 13px;background:white;border-radius:14px 14px 14px 4px;box-shadow:0 1px 4px rgba(0,0,0,0.08);width:fit-content}
+.cptyp{display:flex;gap:4px;padding:9px 13px;background:white;border-radius:14px;box-shadow:0 1px 4px rgba(0,0,0,0.08);width:fit-content}
 .cptyp span{width:6px;height:6px;background:#B0BEC5;border-radius:50%;animation:cpt 1.2s infinite}
 .cptyp span:nth-child(2){animation-delay:.2s}
 .cptyp span:nth-child(3){animation-delay:.4s}
@@ -1716,607 +1713,371 @@ init();
 </style>
 
 <script>
-(function(){
-// ── WIZARD ────────────────────────────────────────────────────────────────────
-var STEPS=['Location','Service','Schedule','Contact','Confirm'];
-var SVCS=[
-  {i:'🚿',n:'Drain Cleaning',d:'Kitchen, bath, main line'},
-  {i:'🔥',n:'Water Heater',d:'Repair or replacement'},
-  {i:'🏗️',n:'Sewer Repair',d:'Camera & repair'},
-  {i:'💧',n:'Leak Detection',d:'Find & fix hidden leaks'},
-  {i:'🚽',n:'Toilet Service',d:'Repair or replacement'},
-  {i:'💎',n:'Water Softener',d:'Install & service'},
-  {i:'🔧',n:'General Repair',d:'Faucets, valves, pipes'},
-  {i:'🚨',n:'Emergency',d:'24/7 urgent response'}
-];
-var ZIPS=['84101','84102','84103','84104','84105','84106','84107','84108','84109','84110','84111','84112','84113','84114','84115','84116','84117','84118','84119','84120','84121','84123','84124','84128','84601','84602','84604','84057','84058','84070','84094','84095','84096','84065','84020','84047','84107'];
-var SB_URL='https://bfnwuurnzvncfumsnnds.supabase.co';
-var SB_KEY='sb_publishable_8aFV9Gj8xlDChJuXuENLHA_stiqieCr';
-var SMS_URL='https://charlies-plumbing-voice-production.up.railway.app/send-sms';
+// ═══════════════════════════════════════════════════════
+//  BOOKING WIZARD
+// ═══════════════════════════════════════════════════════
+var BW = {
+  STEPS: ['Location','Service','Schedule','Contact','Confirm'],
+  SVCS: [
+    {i:'🚿',n:'Drain Cleaning',d:'Kitchen, bath, main line'},
+    {i:'🔥',n:'Water Heater',d:'Repair or replacement'},
+    {i:'🏗️',n:'Sewer Repair',d:'Camera & repair'},
+    {i:'💧',n:'Leak Detection',d:'Find & fix hidden leaks'},
+    {i:'🚽',n:'Toilet Service',d:'Repair or replacement'},
+    {i:'💎',n:'Water Softener',d:'Install & service'},
+    {i:'🔧',n:'General Repair',d:'Faucets, valves, pipes'},
+    {i:'🚨',n:'Emergency',d:'24/7 urgent response'}
+  ],
+  ZIPS: ['84101','84102','84103','84104','84105','84106','84107','84108','84109','84110','84111','84112','84113','84114','84115','84116','84117','84118','84119','84120','84121','84123','84124','84128','84601','84602','84604','84057','84058','84070','84094','84095','84096','84065','84020','84047','84107'],
+  SB_URL: 'https://bfnwuurnzvncfumsnnds.supabase.co',
+  SB_KEY: 'sb_publishable_8aFV9Gj8xlDChJuXuENLHA_stiqieCr',
+  SMS_URL: 'https://charlies-plumbing-voice-production.up.railway.app/send-sms',
+  step: 0, zipOk: false,
+  D: {}
+};
 
-var step=0,zipOk=false;
-var D={zip:'',svc:'',date:'',time:'',fn:'',ln:'',phone:'',email:'',street:'',city:'',addrZip:'',notes:'',sms:true};
+function bwReset() {
+  BW.step = 0; BW.zipOk = false;
+  BW.D = {zip:'',svc:'',date:'',time:'',fn:'',ln:'',phone:'',email:'',street:'',city:'',addrZip:'',notes:'',sms:true};
+}
 
-window.openWizard=function(prefillSvc){
-  step=0;zipOk=false;
-  Object.keys(D).forEach(function(k){D[k]=k==='sms'?true:'';});
-  if(prefillSvc)D.svc=prefillSvc;
-  document.getElementById('bw-overlay').style.display='flex';
+function openWizard(prefillSvc) {
+  bwReset();
+  if (prefillSvc) BW.D.svc = prefillSvc;
+  document.getElementById('bw-overlay').style.display = 'flex';
   bwRender();
-};
-window.closeWizard=function(){document.getElementById('bw-overlay').style.display='none';};
-window.nextStep=function(){
-  if(step===0&&!zipOk){alert('Please enter a valid zip code in our service area.');return;}
-  if(step===1&&!D.svc){alert('Please select a service.');return;}
-  if(step===2&&(!D.date||!D.time)){alert('Please select a date and time.');return;}
-  if(step===3&&!bwValidate())return;
-  if(step===4){bwSubmit();step=5;bwRender();return;}
-  step++;bwRender();
-};
-window.prevStep=function(){if(step>0){step--;bwRender();}};
+}
 
-function bwRender(){
-  var prog=document.getElementById('bw-prog');
-  var body=document.getElementById('bw-body');
-  var next=document.getElementById('bw-next');
-  var back=document.getElementById('bw-back');
-  var lbl=document.getElementById('bw-lbl');
-  next.style.display='';next.style.background='#C0392B';next.innerHTML='Continue &#8594;';
-  back.style.display=(step>0&&step<5)?'block':'none';
-  lbl.textContent=step<5?('Step '+(step+1)+' of 5'):'';
-  if(step<5){
-    prog.style.display='flex';
-    prog.innerHTML=STEPS.map(function(s,i){
-      var cl='bws'+(i<step?' done':i===step?' active':'');
-      return '<div class="'+cl+'" style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative"><div class="bwd">'+(i<step?'&#10003;':(i+1))+'</div><div class="bwsl">'+s+'</div></div>';
+function closeWizard() {
+  document.getElementById('bw-overlay').style.display = 'none';
+}
+
+document.getElementById('bw-x').onclick = closeWizard;
+document.getElementById('bw-overlay').onclick = function(e) { if (e.target === this) closeWizard(); };
+document.getElementById('bw-next').onclick = bwNext;
+document.getElementById('bw-back').onclick = bwPrev;
+
+function bwNext() {
+  if (BW.step === 0 && !BW.zipOk) { alert('Please enter a valid zip code in our service area.'); return; }
+  if (BW.step === 1 && !BW.D.svc) { alert('Please select a service.'); return; }
+  if (BW.step === 2 && (!BW.D.date || !BW.D.time)) { alert('Please select a date and time.'); return; }
+  if (BW.step === 3 && !bwValidate()) return;
+  if (BW.step === 4) { bwSubmit(); BW.step = 5; bwRender(); return; }
+  BW.step++; bwRender();
+}
+
+function bwPrev() { if (BW.step > 0) { BW.step--; bwRender(); } }
+
+function bwRender() {
+  var prog = document.getElementById('bw-prog');
+  var body = document.getElementById('bw-body');
+  var next = document.getElementById('bw-next');
+  var back = document.getElementById('bw-back');
+  var lbl  = document.getElementById('bw-lbl');
+
+  next.style.display = '';
+  next.style.background = '#C0392B';
+  next.innerHTML = 'Continue &#8594;';
+  back.style.display = (BW.step > 0 && BW.step < 5) ? 'block' : 'none';
+  lbl.textContent = BW.step < 5 ? ('Step ' + (BW.step+1) + ' of 5') : '';
+
+  if (BW.step < 5) {
+    prog.style.display = 'flex';
+    prog.innerHTML = BW.STEPS.map(function(s,i) {
+      var cl = 'bws' + (i < BW.step ? ' done' : i === BW.step ? ' active' : '');
+      return '<div class="' + cl + '" style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative"><div class="bwd">' + (i < BW.step ? '&#10003;' : (i+1)) + '</div><div class="bwsl">' + s + '</div></div>';
     }).join('');
-  } else prog.style.display='none';
+  } else {
+    prog.style.display = 'none';
+  }
 
-  if(step===0){
-    body.innerHTML='<div style="text-align:center;margin-bottom:20px"><div style="font-size:48px;margin-bottom:10px">📍</div><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:6px;font-family:Barlow,sans-serif">Where are you located?</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Enter your zip code to confirm we serve your area.</div></div><div class="bwfld"><label class="bwlbl">Zip code<span class="bwreq">*</span></label><input class="bwinp" id="bw-zip" maxlength="5" placeholder="e.g. 84101" value="'+D.zip+'" oninput="bwCheckZip(this.value)" style="text-align:center;font-size:22px;letter-spacing:4px"><div class="bwzr" id="bw-zr"></div></div>';
-    if(D.zip.length===5)bwCheckZip(D.zip);
+  if (BW.step === 0) {
+    body.innerHTML = '<div style="text-align:center;margin-bottom:20px"><div style="font-size:48px;margin-bottom:10px">📍</div><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:6px">Where are you located?</div><div style="font-size:14px;color:#7F8C8D">Enter your zip code to confirm we serve your area.</div></div>'
+      + '<div class="bwfld"><label class="bwlbl">Zip code <span class="bwreq">*</span></label>'
+      + '<input class="bwinp" id="bw-zip" maxlength="5" placeholder="e.g. 84101" value="' + BW.D.zip + '" style="text-align:center;font-size:22px;letter-spacing:4px">'
+      + '<div class="bwzr" id="bw-zr"></div></div>';
+    document.getElementById('bw-zip').oninput = function() { bwCheckZip(this.value); };
+    if (BW.D.zip.length === 5) bwCheckZip(BW.D.zip);
   }
-  else if(step===1){
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">What do you need?</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Select the service that best fits your situation.</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+SVCS.map(function(s){return '<div class="bwsvc'+(D.svc===s.n?' sel':'')+'" onclick="bwSelSvc(\''+s.n+'\',this)"><div style="font-size:20px;flex-shrink:0;margin-top:1px">'+s.i+'</div><div><div style="font-size:13px;font-weight:600;color:#2C3E50;font-family:Barlow,sans-serif">'+s.n+'</div><div style="font-size:11px;color:#7F8C8D;margin-top:2px;font-family:Barlow,sans-serif">'+s.d+'</div></div></div>';}).join('')+'</div>';
+  else if (BW.step === 1) {
+    body.innerHTML = '<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px">What do you need?</div><div style="font-size:14px;color:#7F8C8D">Select the service that best fits your situation.</div></div>'
+      + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
+      + BW.SVCS.map(function(s) {
+          return '<div class="bwsvc' + (BW.D.svc === s.n ? ' sel' : '') + '" data-svc="' + s.n + '">'
+            + '<div style="font-size:20px;flex-shrink:0;margin-top:1px">' + s.i + '</div>'
+            + '<div><div style="font-size:13px;font-weight:600;color:#2C3E50">' + s.n + '</div>'
+            + '<div style="font-size:11px;color:#7F8C8D;margin-top:2px">' + s.d + '</div></div></div>';
+        }).join('')
+      + '</div>';
+    body.querySelectorAll('.bwsvc').forEach(function(el) {
+      el.onclick = function() {
+        BW.D.svc = this.getAttribute('data-svc');
+        body.querySelectorAll('.bwsvc').forEach(function(e) { e.classList.remove('sel'); });
+        this.classList.add('sel');
+      };
+    });
   }
-  else if(step===2){
-    var today=new Date();
-    var dates=[];
-    for(var i=0;i<6;i++){var d=new Date(today);d.setDate(today.getDate()+i+1);var full=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});dates.push({day:d.toLocaleDateString('en-US',{weekday:'short'}),num:d.getDate(),mon:d.toLocaleDateString('en-US',{month:'short'}),full:full});}
-    var times=['8:00 AM','10:00 AM','12:00 PM','2:00 PM','4:00 PM','6:00 PM'];
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">Pick a date &amp; time</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Mountain Time. Subject to availability.</div></div><div class="bwdates">'+dates.map(function(d){return '<div class="bwdt'+(D.date===d.full?' sel':'')+'" onclick="bwSelDate(\''+d.full+'\',this)"><div style="font-size:10px;color:#7F8C8D;font-weight:600">'+d.day+'</div><div style="font-size:18px;font-weight:600;color:#2C3E50">'+d.num+'</div><div style="font-size:10px;color:#7F8C8D">'+d.mon+'</div></div>';}).join('')+'</div><div class="bwlbl" style="margin-bottom:10px">Preferred time<span class="bwreq">*</span></div><div class="bwtimes">'+times.map(function(t){return '<div class="bwtm'+(D.time===t?' sel':'')+'" onclick="bwSelTime(\''+t+'\',this)">'+t+'</div>';}).join('')+'</div>';
+  else if (BW.step === 2) {
+    var today = new Date();
+    var dates = [];
+    for (var i = 0; i < 6; i++) {
+      var d = new Date(today); d.setDate(today.getDate() + i + 1);
+      dates.push({ day: d.toLocaleDateString('en-US',{weekday:'short'}), num: d.getDate(), mon: d.toLocaleDateString('en-US',{month:'short'}), full: d.toLocaleDateString('en-US',{month:'short',day:'numeric'}) });
+    }
+    var times = ['8:00 AM','10:00 AM','12:00 PM','2:00 PM','4:00 PM','6:00 PM'];
+    body.innerHTML = '<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px">Pick a date &amp; time</div><div style="font-size:14px;color:#7F8C8D">Mountain Time. Subject to availability.</div></div>'
+      + '<div class="bwdates">'
+      + dates.map(function(d) {
+          return '<div class="bwdt' + (BW.D.date === d.full ? ' sel' : '') + '" data-date="' + d.full + '">'
+            + '<div style="font-size:10px;color:#7F8C8D;font-weight:600">' + d.day + '</div>'
+            + '<div style="font-size:18px;font-weight:600;color:#2C3E50">' + d.num + '</div>'
+            + '<div style="font-size:10px;color:#7F8C8D">' + d.mon + '</div></div>';
+        }).join('')
+      + '</div>'
+      + '<div class="bwlbl" style="margin-bottom:10px">Preferred time <span class="bwreq">*</span></div>'
+      + '<div class="bwtimes">'
+      + times.map(function(t) {
+          return '<div class="bwtm' + (BW.D.time === t ? ' sel' : '') + '" data-time="' + t + '">' + t + '</div>';
+        }).join('')
+      + '</div>';
+    body.querySelectorAll('.bwdt').forEach(function(el) {
+      el.onclick = function() { BW.D.date = this.getAttribute('data-date'); body.querySelectorAll('.bwdt').forEach(function(e){e.classList.remove('sel');}); this.classList.add('sel'); };
+    });
+    body.querySelectorAll('.bwtm').forEach(function(el) {
+      el.onclick = function() { BW.D.time = this.getAttribute('data-time'); body.querySelectorAll('.bwtm').forEach(function(e){e.classList.remove('sel');}); this.classList.add('sel'); };
+    });
   }
-  else if(step===3){
-    next.innerHTML='Review booking &#8594;';
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">Your contact info</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">We\'ll confirm and call before arrival.</div></div>'
-      +'<div class="bwr2"><div class="bwfld"><label class="bwlbl">First name<span class="bwreq">*</span></label><input class="bwinp" id="f-fn" value="'+D.fn+'" placeholder="John" oninput="D.fn=this.value"><div class="bwem" id="e-fn">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Last name<span class="bwreq">*</span></label><input class="bwinp" id="f-ln" value="'+D.ln+'" placeholder="Smith" oninput="D.ln=this.value"><div class="bwem" id="e-ln">Required.</div></div></div>'
-      +'<div class="bwr2"><div class="bwfld"><label class="bwlbl">Phone<span class="bwreq">*</span></label><input class="bwinp" id="f-ph" value="'+D.phone+'" placeholder="(801) 555-0100" oninput="D.phone=this.value"><div class="bwem" id="e-ph">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Email<span class="bwreq">*</span></label><input class="bwinp" id="f-em" type="email" value="'+D.email+'" placeholder="you@email.com" oninput="D.email=this.value"><div class="bwem" id="e-em">Valid email required.</div></div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Street address<span class="bwreq">*</span></label><input class="bwinp" id="f-st" value="'+D.street+'" placeholder="123 Main St" oninput="D.street=this.value"><div class="bwem" id="e-st">Required.</div></div>'
-      +'<div class="bwr3"><div class="bwfld"><label class="bwlbl">City<span class="bwreq">*</span></label><input class="bwinp" id="f-ci" value="'+D.city+'" placeholder="Salt Lake City" oninput="D.city=this.value"><div class="bwem" id="e-ci">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">State</label><input class="bwinp" id="f-st2" value="UT" readonly style="background:#F8F9FA;color:#7F8C8D"></div>'
-      +'<div class="bwfld"><label class="bwlbl">Zip<span class="bwreq">*</span></label><input class="bwinp" id="f-az" value="'+D.addrZip+'" placeholder="84101" oninput="D.addrZip=this.value"><div class="bwem" id="e-az">Required.</div></div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Additional notes <span style="font-weight:400;color:#7F8C8D;text-transform:none">(optional)</span></label><textarea class="bwta" id="f-nt" placeholder="Describe the issue, access instructions, or anything helpful for our tech..." oninput="D.notes=this.value">'+D.notes+'</textarea></div>'
-      +'<div class="bwfld"><div class="bwoptin"><div style="display:flex;align-items:flex-start;gap:10px;cursor:pointer" onclick="bwToggle()"><div class="bwcb'+(D.sms?' on':'')+'" id="bw-cb">'+(D.sms?'<span style="color:#fff;font-size:12px">&#10003;</span>':'')+'</div><div style="font-size:13px;color:#2C3E50;line-height:1.5;font-family:Barlow,sans-serif">Receive text message updates about my appointment <span style="background:#e8f4fc;color:#1A3A5C;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:4px">SMS</span></div></div><div style="font-size:11px;color:#7F8C8D;margin-top:10px;padding-top:10px;border-top:1px solid #E2E6EA;line-height:1.5;font-family:Barlow,sans-serif">By checking this box you agree to receive automated appointment confirmation and status texts from Charlie\'s Plumbing. Msg &amp; data rates may apply. Reply STOP to cancel.</div></div></div>';
-    // Pre-fill address zip from step 1
-    if(!D.addrZip&&D.zip)D.addrZip=D.zip;
-    var azEl=document.getElementById('f-az');if(azEl&&!azEl.value&&D.zip)azEl.value=D.zip;
+  else if (BW.step === 3) {
+    next.innerHTML = 'Review booking &#8594;';
+    body.innerHTML = '<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px">Your contact info</div><div style="font-size:14px;color:#7F8C8D">We\'ll confirm and call before arrival.</div></div>'
+      + '<div class="bwr2">'
+      + '<div class="bwfld"><label class="bwlbl">First name <span class="bwreq">*</span></label><input class="bwinp" id="f-fn" value="' + BW.D.fn + '" placeholder="John"><div class="bwem" id="e-fn">Required.</div></div>'
+      + '<div class="bwfld"><label class="bwlbl">Last name <span class="bwreq">*</span></label><input class="bwinp" id="f-ln" value="' + BW.D.ln + '" placeholder="Smith"><div class="bwem" id="e-ln">Required.</div></div></div>'
+      + '<div class="bwr2">'
+      + '<div class="bwfld"><label class="bwlbl">Phone <span class="bwreq">*</span></label><input class="bwinp" id="f-ph" value="' + BW.D.phone + '" placeholder="(801) 555-0100"><div class="bwem" id="e-ph">Required.</div></div>'
+      + '<div class="bwfld"><label class="bwlbl">Email <span class="bwreq">*</span></label><input class="bwinp" id="f-em" type="email" value="' + BW.D.email + '" placeholder="you@email.com"><div class="bwem" id="e-em">Valid email required.</div></div></div>'
+      + '<div class="bwfld"><label class="bwlbl">Street address <span class="bwreq">*</span></label><input class="bwinp" id="f-st" value="' + BW.D.street + '" placeholder="123 Main St"><div class="bwem" id="e-st">Required.</div></div>'
+      + '<div class="bwr3">'
+      + '<div class="bwfld"><label class="bwlbl">City <span class="bwreq">*</span></label><input class="bwinp" id="f-ci" value="' + BW.D.city + '" placeholder="Salt Lake City"><div class="bwem" id="e-ci">Required.</div></div>'
+      + '<div class="bwfld"><label class="bwlbl">State</label><input class="bwinp" value="UT" readonly style="background:#F8F9FA;color:#7F8C8D"></div>'
+      + '<div class="bwfld"><label class="bwlbl">Zip <span class="bwreq">*</span></label><input class="bwinp" id="f-az" value="' + (BW.D.addrZip || BW.D.zip) + '" placeholder="84101"><div class="bwem" id="e-az">Required.</div></div></div>'
+      + '<div class="bwfld"><label class="bwlbl">Notes <span style="font-weight:400;text-transform:none">(optional)</span></label>'
+      + '<textarea class="bwta" id="f-nt" placeholder="Describe the issue, access instructions, or anything helpful...">' + BW.D.notes + '</textarea></div>'
+      + '<div class="bwfld"><div style="border:1px solid #E2E6EA;border-radius:8px;padding:14px;background:#F8F9FA">'
+      + '<div style="display:flex;align-items:flex-start;gap:10px;cursor:pointer" id="bw-sms-row">'
+      + '<div class="bwcb' + (BW.D.sms ? ' on' : '') + '" id="bw-cb">' + (BW.D.sms ? '&#10003;' : '') + '</div>'
+      + '<div style="font-size:13px;color:#2C3E50;line-height:1.5">Receive text updates about my appointment <span style="background:#e8f4fc;color:#1A3A5C;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:4px">SMS</span></div></div>'
+      + '<div style="font-size:11px;color:#7F8C8D;margin-top:10px;padding-top:10px;border-top:1px solid #E2E6EA;line-height:1.5">By checking this box you agree to receive automated appointment texts from Charlie\'s Plumbing. Msg &amp; data rates may apply. Reply STOP to cancel.</div>'
+      + '</div></div>';
+
+    // Wire up input events
+    ['fn','ln','ph','em','st','ci','az'].forEach(function(id) {
+      var el = document.getElementById('f-' + id);
+      if (el) el.oninput = function() {
+        var map = {fn:'fn',ln:'ln',ph:'phone',em:'email',st:'street',ci:'city',az:'addrZip'};
+        BW.D[map[id]] = this.value;
+      };
+    });
+    var nt = document.getElementById('f-nt');
+    if (nt) nt.oninput = function() { BW.D.notes = this.value; };
+    document.getElementById('bw-sms-row').onclick = function() {
+      BW.D.sms = !BW.D.sms;
+      var cb = document.getElementById('bw-cb');
+      cb.className = 'bwcb' + (BW.D.sms ? ' on' : '');
+      cb.innerHTML = BW.D.sms ? '&#10003;' : '';
+    };
   }
-  else if(step===4){
-    next.textContent='Confirm booking';
-    D.name=(D.fn+' '+D.ln).trim();
-    D.addr=D.street+', '+D.city+', UT '+D.addrZip;
-    var rows=[['Service',D.svc],['Date &amp; time',D.date+' &middot; '+D.time],['Address',D.addr],['Name',D.name],['Phone',D.phone],['Email',D.email],['SMS updates',D.sms?'&#10003; Opted in':'Not opted in']];
-    body.innerHTML='<div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:16px;font-family:Barlow,sans-serif">Review your booking</div>'
-      +'<div style="background:#F8F9FA;border-radius:8px;padding:14px;margin-bottom:'+(D.notes?'14':'0')+'px">'+rows.map(function(r){return '<div class="bwcr"><span style="color:#7F8C8D;flex-shrink:0">'+r[0]+'</span><span style="color:#2C3E50;font-weight:600;text-align:right">'+r[1]+'</span></div>';}).join('')+'</div>'
-      +(D.notes?'<div class="bwlbl" style="margin-bottom:6px;margin-top:2px">Notes</div><div style="background:#F8F9FA;border-radius:8px;padding:10px 12px;font-size:13px;color:#7F8C8D;line-height:1.5;font-style:italic;font-family:Barlow,sans-serif">'+D.notes+'</div>':'')
-      +'<div style="font-size:12px;color:#7F8C8D;line-height:1.5;margin-top:14px;font-family:Barlow,sans-serif">By confirming you agree to our Terms of Service.'+(D.sms?' Appointment updates will be sent via text to '+D.phone+'.':'')+'</div>';
+  else if (BW.step === 4) {
+    next.textContent = 'Confirm booking';
+    BW.D.name = (BW.D.fn + ' ' + BW.D.ln).trim();
+    BW.D.addr = BW.D.street + ', ' + BW.D.city + ', UT ' + BW.D.addrZip;
+    var rows = [['Service', BW.D.svc], ['Date &amp; time', BW.D.date + ' &middot; ' + BW.D.time], ['Address', BW.D.addr], ['Name', BW.D.name], ['Phone', BW.D.phone], ['Email', BW.D.email], ['SMS updates', BW.D.sms ? '&#10003; Opted in' : 'Not opted in']];
+    body.innerHTML = '<div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:16px">Review your booking</div>'
+      + '<div style="background:#F8F9FA;border-radius:8px;padding:14px;margin-bottom:' + (BW.D.notes ? '14' : '0') + 'px">'
+      + rows.map(function(r) { return '<div class="bwcr"><span style="color:#7F8C8D;flex-shrink:0">' + r[0] + '</span><span style="color:#2C3E50;font-weight:600;text-align:right">' + r[1] + '</span></div>'; }).join('')
+      + '</div>'
+      + (BW.D.notes ? '<div class="bwlbl" style="margin-bottom:6px">Notes</div><div style="background:#F8F9FA;border-radius:8px;padding:10px 12px;font-size:13px;color:#7F8C8D;line-height:1.5;font-style:italic">' + BW.D.notes + '</div>' : '')
+      + '<div style="font-size:12px;color:#7F8C8D;line-height:1.5;margin-top:14px">By confirming you agree to our Terms of Service.' + (BW.D.sms ? ' Appointment updates will be sent via text to ' + BW.D.phone + '.' : '') + '</div>';
   }
-  else if(step===5){
-    next.style.display='none';back.style.display='none';lbl.textContent='';
-    body.innerHTML='<div style="text-align:center;padding:20px 0">'
-      +'<div style="width:64px;height:64px;border-radius:50%;background:#eafaf1;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px">&#10003;</div>'
-      +'<div style="font-size:22px;font-weight:700;color:#2C3E50;margin-bottom:10px;font-family:Barlow Condensed,sans-serif;letter-spacing:0.5px">You\'re booked!</div>'
-      +'<div style="font-size:15px;color:#7F8C8D;line-height:1.7;margin-bottom:20px;font-family:Barlow,sans-serif">Your request for <strong style="color:#2C3E50">'+D.svc+'</strong> on <strong style="color:#2C3E50">'+D.date+' at '+D.time+'</strong> has been received.<br><br>Confirmation sent to <strong style="color:#2C3E50">'+D.email+'</strong>.'+(D.sms?' Text updates to <strong style="color:#2C3E50">'+D.phone+'</strong>.':'')+'<br><br>Our team will call to confirm shortly.</div>'
-      +'<div style="background:#e8f4fc;border-radius:8px;padding:12px 16px;font-size:13px;color:#1A3A5C;margin-bottom:20px;text-align:left;font-family:Barlow,sans-serif"><strong>Need to reach us?</strong><br>Call or text (801) 406-8585 &middot; Mon&ndash;Sat 7AM&ndash;7PM &middot; 24/7 Emergency</div>'
-      +'<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="tel:8014068585" style="padding:10px 20px;background:#1A3A5C;color:#fff;border-radius:8px;font-size:14px;text-decoration:none;font-weight:600;font-family:Barlow Condensed,sans-serif">&#128222; Call (801) 406-8585</a>'
-      +'<button onclick="closeWizard()" style="padding:10px 20px;border-radius:8px;border:1px solid #E2E6EA;background:#fff;font-size:14px;cursor:pointer;font-family:Barlow,sans-serif">Close</button></div></div>';
+  else if (BW.step === 5) {
+    next.style.display = 'none'; back.style.display = 'none'; lbl.textContent = '';
+    prog.style.display = 'none';
+    body.innerHTML = '<div style="text-align:center;padding:20px 0">'
+      + '<div style="width:64px;height:64px;border-radius:50%;background:#eafaf1;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px">&#10003;</div>'
+      + '<div style="font-size:22px;font-weight:700;color:#2C3E50;margin-bottom:10px;font-family:Barlow Condensed,sans-serif">You\'re booked!</div>'
+      + '<div style="font-size:15px;color:#7F8C8D;line-height:1.7;margin-bottom:20px">Your request for <strong style="color:#2C3E50">' + BW.D.svc + '</strong> on <strong style="color:#2C3E50">' + BW.D.date + ' at ' + BW.D.time + '</strong> has been received.<br><br>Confirmation sent to <strong style="color:#2C3E50">' + BW.D.email + '</strong>.' + (BW.D.sms ? ' Text updates to <strong style="color:#2C3E50">' + BW.D.phone + '</strong>.' : '') + '<br><br>Our team will call to confirm shortly.</div>'
+      + '<div style="background:#e8f4fc;border-radius:8px;padding:12px 16px;font-size:13px;color:#1A3A5C;margin-bottom:20px;text-align:left"><strong>Need to reach us?</strong><br>Call or text (801) 406-8585 &middot; Mon&ndash;Sat 7AM&ndash;7PM &middot; 24/7 Emergency</div>'
+      + '<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">'
+      + '<a href="tel:8014068585" style="padding:10px 20px;background:#1A3A5C;color:#fff;border-radius:8px;font-size:14px;text-decoration:none;font-weight:600">&#128222; Call (801) 406-8585</a>'
+      + '<button onclick="closeWizard()" style="padding:10px 20px;border-radius:8px;border:1px solid #E2E6EA;background:#fff;font-size:14px;cursor:pointer">Close</button></div></div>';
   }
 }
 
-window.bwCheckZip=function(v){
-  D.zip=v;
-  if(v.length<5){document.getElementById('bw-zr').style.display='none';zipOk=false;return;}
-  var el=document.getElementById('bw-zr');
-  if(ZIPS.indexOf(v)>=0){el.className='bwzr bwzok';el.textContent='✓ Great news — we service your area!';zipOk=true;}
-  else{el.className='bwzr bwzno';el.textContent='✗ We may not serve that area. Call (801) 406-8585 to confirm.';zipOk=false;}
-  el.style.display='block';
-};
-window.bwSelSvc=function(n,el){D.svc=n;document.querySelectorAll('.bwsvc').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwSelDate=function(d,el){D.date=d;document.querySelectorAll('.bwdt').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwSelTime=function(t,el){D.time=t;document.querySelectorAll('.bwtm').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwToggle=function(){D.sms=!D.sms;var cb=document.getElementById('bw-cb');cb.className='bwcb'+(D.sms?' on':'');cb.innerHTML=D.sms?'<span style="color:#fff;font-size:12px">&#10003;</span>':'';};
+function bwCheckZip(v) {
+  BW.D.zip = v;
+  var el = document.getElementById('bw-zr');
+  if (!el) return;
+  if (v.length < 5) { el.style.display = 'none'; BW.zipOk = false; return; }
+  if (BW.ZIPS.indexOf(v) >= 0) { el.className = 'bwzr bwzok'; el.textContent = '✓ Great news — we service your area!'; BW.zipOk = true; }
+  else { el.className = 'bwzr bwzno'; el.textContent = '✗ We may not serve that area. Call (801) 406-8585 to confirm.'; BW.zipOk = false; }
+  el.style.display = 'block';
+}
 
-function bwShowErr(id,show){var e=document.getElementById('e-'+id);var i=document.getElementById('f-'+id);if(e)e.style.display=show?'block':'none';if(i){if(show)i.classList.add('bwerr');else i.classList.remove('bwerr');}}
-function bwValidate(){
-  var ok=true;
-  if(!D.fn.trim()){bwShowErr('fn',true);ok=false;}else bwShowErr('fn',false);
-  if(!D.ln.trim()){bwShowErr('ln',true);ok=false;}else bwShowErr('ln',false);
-  if(!D.phone.trim()){bwShowErr('ph',true);ok=false;}else bwShowErr('ph',false);
-  if(!D.email.trim()||D.email.indexOf('@')<0){bwShowErr('em',true);ok=false;}else bwShowErr('em',false);
-  if(!D.street.trim()){bwShowErr('st',true);ok=false;}else bwShowErr('st',false);
-  if(!D.city.trim()){bwShowErr('ci',true);ok=false;}else bwShowErr('ci',false);
-  if(!D.addrZip.trim()){bwShowErr('az',true);ok=false;}else bwShowErr('az',false);
+function bwShowErr(id, show) {
+  var e = document.getElementById('e-' + id);
+  var i = document.getElementById('f-' + id);
+  if (e) e.style.display = show ? 'block' : 'none';
+  if (i) { if (show) i.classList.add('bwerr'); else i.classList.remove('bwerr'); }
+}
+
+function bwValidate() {
+  var ok = true;
+  if (!BW.D.fn.trim()) { bwShowErr('fn',true); ok=false; } else bwShowErr('fn',false);
+  if (!BW.D.ln.trim()) { bwShowErr('ln',true); ok=false; } else bwShowErr('ln',false);
+  if (!BW.D.phone.trim()) { bwShowErr('ph',true); ok=false; } else bwShowErr('ph',false);
+  if (!BW.D.email.trim() || BW.D.email.indexOf('@') < 0) { bwShowErr('em',true); ok=false; } else bwShowErr('em',false);
+  if (!BW.D.street.trim()) { bwShowErr('st',true); ok=false; } else bwShowErr('st',false);
+  if (!BW.D.city.trim()) { bwShowErr('ci',true); ok=false; } else bwShowErr('ci',false);
+  if (!BW.D.addrZip.trim()) { bwShowErr('az',true); ok=false; } else bwShowErr('az',false);
   return ok;
 }
-function bwSubmit(){
-  D.name=(D.fn+' '+D.ln).trim();
-  D.addr=D.street+', '+D.city+', UT '+D.addrZip;
-  fetch(SB_URL+'/rest/v1/customers',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify({name:D.name,phone:D.phone,email:D.email,address:D.addr})})
-  .then(function(r){return r.json();}).then(function(cust){
-    var c=Array.isArray(cust)?cust[0]:cust;
-    return fetch(SB_URL+'/rest/v1/jobs',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY},body:JSON.stringify({customer_id:c&&c.id?c.id:null,service_type:D.svc,address:D.addr,notes:(D.notes?D.notes+' ':'')+'Preferred: '+D.date+' '+D.time+(D.sms?' | SMS: yes':' | SMS: no'),status:'scheduled',source:'website_wizard',urgency:D.svc==='Emergency'?'urgent':'normal'})});
-  }).catch(function(e){console.error('Booking error:',e);});
-  if(D.sms&&D.phone){fetch(SMS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:D.phone,body:"Hi "+D.fn+"! Charlie's Plumbing received your booking for "+D.svc+" on "+D.date+" at "+D.time+". We'll call to confirm shortly. Questions? Call (801) 406-8585."})}).catch(function(){});}
+
+function bwSubmit() {
+  BW.D.name = (BW.D.fn + ' ' + BW.D.ln).trim();
+  BW.D.addr = BW.D.street + ', ' + BW.D.city + ', UT ' + BW.D.addrZip;
+  fetch(BW.SB_URL + '/rest/v1/customers', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json','apikey':BW.SB_KEY,'Authorization':'Bearer '+BW.SB_KEY,'Prefer':'resolution=merge-duplicates,return=representation'},
+    body: JSON.stringify({name:BW.D.name,phone:BW.D.phone,email:BW.D.email,address:BW.D.addr})
+  }).then(function(r) { return r.json(); }).then(function(cust) {
+    var c = Array.isArray(cust) ? cust[0] : cust;
+    fetch(BW.SB_URL + '/rest/v1/jobs', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json','apikey':BW.SB_KEY,'Authorization':'Bearer '+BW.SB_KEY},
+      body: JSON.stringify({customer_id:c&&c.id?c.id:null,service_type:BW.D.svc,address:BW.D.addr,notes:(BW.D.notes?BW.D.notes+' ':'')+'Preferred: '+BW.D.date+' '+BW.D.time+(BW.D.sms?' | SMS: yes':' | SMS: no'),status:'scheduled',source:'website_wizard',urgency:BW.D.svc==='Emergency'?'urgent':'normal'})
+    });
+  }).catch(function(e) { console.error('Booking error:', e); });
+  if (BW.D.sms && BW.D.phone) {
+    fetch(BW.SMS_URL, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:BW.D.phone,body:"Hi "+BW.D.fn+"! Charlie's Plumbing received your booking for "+BW.D.svc+" on "+BW.D.date+" at "+BW.D.time+". We'll call to confirm. Questions? Call (801) 406-8585."})}).catch(function(){});
+  }
 }
 
-// ── WEBCHAT ───────────────────────────────────────────────────────────────────
-var cpOpen_state=false,cpHistory=[],cpBookingStarted=false;
-var CHAT_URL='https://charlies-plumbing-voice-production.up.railway.app/chat';
-var CP_SYSTEM='You are Aria, the AI assistant for Charlie\'s Plumbing. Keep all answers to 1-2 sentences. CRITICAL RULE: NEVER collect booking info in chat. NEVER ask for name, phone, address, or service in chat. If the user mentions booking, scheduling, appointment, or service — respond ONLY with \"I\'ll open our booking wizard for you!\" and use the launch_booking_wizard tool immediately. Do not ask anything first. Just launch it. Pricing: drain cleaning from $89, water heaters from $800, sewer inspection from $149. Hours: Mon-Fri 7AM-7PM, Sat 8AM-5PM, emergency 24\/7. Service area: Salt Lake City metro and Wasatch Front.';\
-
-
-window.cpToggle=function(){cpOpen_state?cpClose():cpOpen();};
-window.cpOpen=function(){
-  cpOpen_state=true;
-  document.getElementById('cp-window').style.display='flex';
-  document.getElementById('cp-chat-icon').style.display='none';
-  document.getElementById('cp-close-icon').style.display='block';
-  document.getElementById('cp-greeting').style.display='none';
-  document.getElementById('cp-badge').style.display='none';
-  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['📅 Book appointment','Pricing info','Service area?','Emergency help']);},300);}
-  document.getElementById('cp-input').focus();
+// ═══════════════════════════════════════════════════════
+//  WEBCHAT
+// ═══════════════════════════════════════════════════════
+var CP = {
+  open: false,
+  history: [],
+  CHAT_URL: 'https://charlies-plumbing-voice-production.up.railway.app/chat',
+  BOOK_WORDS: ['book','schedul','appoint','fix','repair','install','replace','drain','heater','sewer','leak','toilet','softener','emergency','urgent','asap','today','tomorrow','available','when can','come out','send someone','need a plumber','need plumb','need help'],
+  SYSTEM: "You are Aria, Charlie's Plumbing AI assistant. Answer questions in 1-2 short sentences. You only answer questions — you do NOT collect booking info. Topics: pricing (drain cleaning from $89, water heaters from $800, sewer inspection from $149), hours (Mon-Fri 7AM-7PM, Sat 8AM-5PM, emergency 24/7), service area (Salt Lake City metro and Wasatch Front), services (drain cleaning, water heaters, sewer, leaks, toilets, water softeners, general plumbing, emergency)."
 };
-window.cpClose=function(){
-  cpOpen_state=false;
-  document.getElementById('cp-window').style.display='none';
-  document.getElementById('cp-chat-icon').style.display='block';
-  document.getElementById('cp-close-icon').style.display='none';
-};
-window.cpLaunchWizard=function(){cpClose();openWizard();};
 
-setTimeout(function(){if(!cpOpen_state)document.getElementById('cp-greeting').style.display='block';},10000);
+function cpToggle() { CP.open ? cpClose() : cpOpenChat(); }
+function cpOpenChat() {
+  CP.open = true;
+  document.getElementById('cp-win').style.display = 'flex';
+  document.getElementById('cp-icon1').style.display = 'none';
+  document.getElementById('cp-icon2').style.display = 'block';
+  document.getElementById('cp-greet').style.display = 'none';
+  document.getElementById('cp-badge').style.display = 'none';
+  if (CP.history.length === 0) {
+    setTimeout(function() {
+      cpAddMsg('bot', '👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about services, pricing, and availability. Ready to schedule? Use the button below!');
+      cpShowQuick(['Pricing info', 'Service area?', 'Hours?', 'Emergency help']);
+      cpShowBookBar(true);
+    }, 300);
+  }
+  document.getElementById('cp-inp').focus();
+}
+function cpClose() {
+  CP.open = false;
+  document.getElementById('cp-win').style.display = 'none';
+  document.getElementById('cp-icon1').style.display = 'block';
+  document.getElementById('cp-icon2').style.display = 'none';
+}
 
-function cpAddMsg(role,text){
-  var msgs=document.getElementById('cp-msgs');
-  var div=document.createElement('div');
-  div.className='cpmsg'+(role==='user'?' u':'');
-  var av=document.createElement('div');av.className='cpav';av.textContent=role==='user'?'👤':'🔧';
-  var bub=document.createElement('div');bub.className='cpbub';bub.innerHTML=text.replace(/\n/g,'<br>');
-  div.appendChild(av);div.appendChild(bub);
-  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+document.getElementById('cp-btn').onclick = cpToggle;
+document.getElementById('cp-greet').onclick = cpOpenChat;
+document.getElementById('cp-bookbtn').onclick = function() { cpClose(); openWizard(); };
+document.getElementById('cp-sendbtn').onclick = cpSend;
+document.getElementById('cp-inp').onkeypress = function(e) { if (e.key === 'Enter') cpSend(); };
+
+setTimeout(function() { if (!CP.open) document.getElementById('cp-greet').style.display = 'block'; }, 10000);
+
+function cpAddMsg(role, text) {
+  var msgs = document.getElementById('cp-msgs');
+  var div = document.createElement('div');
+  div.className = 'cpmsg' + (role === 'user' ? ' u' : '');
+  var av = document.createElement('div'); av.className = 'cpav'; av.textContent = role === 'user' ? '👤' : '🔧';
+  var bub = document.createElement('div'); bub.className = 'cpbub'; bub.innerHTML = text.replace(/\n/g,'<br>');
+  div.appendChild(av); div.appendChild(bub);
+  msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
 }
-function cpShowTyping(){
-  var msgs=document.getElementById('cp-msgs');
-  var div=document.createElement('div');div.className='cpmsg';div.id='cp-typ';
-  var av=document.createElement('div');av.className='cpav';av.textContent='🔧';
-  var t=document.createElement('div');t.className='cptyp';t.innerHTML='<span></span><span></span><span></span>';
-  div.appendChild(av);div.appendChild(t);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
+
+function cpShowTyping() {
+  var msgs = document.getElementById('cp-msgs');
+  var div = document.createElement('div'); div.className = 'cpmsg'; div.id = 'cp-typ';
+  var av = document.createElement('div'); av.className = 'cpav'; av.textContent = '🔧';
+  var t = document.createElement('div'); t.className = 'cptyp'; t.innerHTML = '<span></span><span></span><span></span>';
+  div.appendChild(av); div.appendChild(t); msgs.appendChild(div); msgs.scrollTop = msgs.scrollHeight;
 }
-function cpRemoveTyping(){var e=document.getElementById('cp-typ');if(e)e.remove();}
-function cpShowQuick(opts){
-  var c=document.getElementById('cp-quick');c.innerHTML='';
-  opts.forEach(function(o){
-    var b=document.createElement('button');b.className='cpqb';b.textContent=o;
-    b.onclick=function(){
-      if(o.indexOf('wizard')>=0||o.indexOf('Book')>=0||o.indexOf('book')>=0||o.indexOf('Schedule')>=0){cpLaunchWizard();return;}
-      if(o.indexOf('Call (801)')>=0){window.open('tel:8014068585');return;}
-      document.getElementById('cp-input').value=o;cpSend();
+function cpRemoveTyping() { var e = document.getElementById('cp-typ'); if (e) e.remove(); }
+
+function cpShowQuick(opts) {
+  var c = document.getElementById('cp-quick'); c.innerHTML = '';
+  opts.forEach(function(o) {
+    var b = document.createElement('button'); b.className = 'cpqb'; b.textContent = o;
+    b.onclick = function() {
+      document.getElementById('cp-inp').value = o;
+      cpSend();
     };
     c.appendChild(b);
   });
 }
-function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
 
-// Booking intent keywords — intercept before hitting API
-var BOOK_KEYWORDS=['book','schedul','appoint','come out','send someone','need a plumber','fix','repair','install','replace','service','drain','heater','sewer','leak','toilet','softener','emergency','urgent','asap','today','tomorrow','available','when can'];
+function cpShowBookBar(show) {
+  document.getElementById('cp-bookbar').style.display = show ? 'block' : 'none';
+}
 
-window.cpSend=function(){
-  var input=document.getElementById('cp-input');
-  var text=input.value.trim();if(!text)return;
-  input.value='';document.getElementById('cp-quick').innerHTML='';
-  cpAddMsg('user',text);
+function cpSend() {
+  var input = document.getElementById('cp-inp');
+  var text = input.value.trim(); if (!text) return;
+  input.value = '';
+  document.getElementById('cp-quick').innerHTML = '';
+  cpAddMsg('user', text);
 
-  // Client-side booking intent detection — no API call needed
-  var lower=text.toLowerCase();
-  var isBooking=BOOK_KEYWORDS.some(function(k){return lower.indexOf(k)>=0;});
+  // Check for booking intent client-side
+  var lower = text.toLowerCase();
+  var isBooking = CP.BOOK_WORDS.some(function(k) { return lower.indexOf(k) >= 0; });
 
-  if(isBooking){
-    setTimeout(function(){
-      cpAddMsg('bot','I\'ll open our booking wizard for you! It only takes 2 minutes. 📅');
+  if (isBooking) {
+    setTimeout(function() {
+      cpAddMsg('bot', 'I\'ll open our booking wizard for you! It takes just 2 minutes to schedule. 📅');
       cpShowBookBar(true);
-      cpShowQuick(['📅 Open booking wizard','Call instead']);
-    },400);
+      cpShowQuick(['Pricing info', 'Service area?']);
+    }, 400);
     return;
   }
 
-  // Non-booking question — send to Claude
-  cpHistory.push({role:'user',content:text});
+  // Send Q&A to Claude
+  CP.history.push({role:'user', content:text});
   cpShowTyping();
-  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM})})
-  .then(function(r){return r.json();}).then(function(data){
+  fetch(CP.CHAT_URL, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({messages: CP.history, system: CP.SYSTEM})
+  }).then(function(r) { return r.json(); }).then(function(data) {
     cpRemoveTyping();
-    var reply=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
-    if(reply){cpHistory.push({role:'assistant',content:reply});cpAddMsg('bot',reply);}
-    cpShowBookBar(false);
-    cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
-  }).catch(function(err){
+    var reply = (data.content || []).filter(function(b) { return b.type === 'text'; }).map(function(b) { return b.text; }).join('');
+    if (reply) { CP.history.push({role:'assistant', content:reply}); cpAddMsg('bot', reply); }
+    cpShowBookBar(true);
+    cpShowQuick(['📅 Book now', 'More questions', 'Call (801) 406-8585']);
+  }).catch(function(err) {
     cpRemoveTyping();
-    cpAddMsg('bot','Sorry, I had a brief issue. Call us at 📞 (801) 406-8585 and we\'ll help right away!');
-    console.error('Chat error:',err);
-  });
-};
-})();
-</script>
-
-</body>
-</html>
-
-<!-- BOOKING WIZARD MODAL -->
-<div id="bw-overlay" onclick="if(event.target===this)closeWizard()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;padding:16px">
-  <div style="background:#fff;border-radius:16px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,0.3)">
-    <div style="background:#1A3A5C;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:16px 16px 0 0;border-bottom:3px solid #C0392B;position:sticky;top:0;z-index:1">
-      <div>
-        <div style="color:#fff;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;opacity:0.6;margin-bottom:2px">Charlie's Plumbing &amp; Drain Cleaning</div>
-        <div style="color:#fff;font-size:18px;font-weight:600">Book online now</div>
-      </div>
-      <button onclick="closeWizard()" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#fff;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center">&#x2715;</button>
-    </div>
-    <div id="bw-prog" style="display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid #E2E6EA;background:#F8F9FA"></div>
-    <div id="bw-body" style="padding:24px 20px;min-height:280px"></div>
-    <div style="padding:14px 20px;border-top:1px solid #E2E6EA;display:flex;justify-content:space-between;align-items:center;background:#F8F9FA;border-radius:0 0 16px 16px;position:sticky;bottom:0">
-      <button id="bw-back" onclick="prevStep()" style="display:none;padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #E2E6EA;background:#fff;color:#2C3E50;font-family:Barlow,sans-serif">&#8592; Back</button>
-      <div style="font-size:12px;color:#7F8C8D" id="bw-lbl">Step 1 of 5</div>
-      <button id="bw-next" onclick="nextStep()" style="padding:9px 22px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;background:#C0392B;color:#fff;font-family:Barlow,sans-serif">Continue &#8594;</button>
-    </div>
-  </div>
-</div>
-
-<!-- IMPROVED WEBCHAT WIDGET -->
-<div id="cp-chat-widget" style="position:fixed;bottom:24px;right:24px;z-index:9998;font-family:Barlow,sans-serif">
-  <div id="cp-greeting" onclick="cpOpen()" style="display:none;position:absolute;bottom:76px;right:0;background:white;border-radius:16px 16px 4px 16px;padding:12px 16px;box-shadow:0 4px 16px rgba(0,0,0,0.15);font-size:14px;color:#2C3E50;max-width:260px;line-height:1.5;cursor:pointer;border:1px solid #E2E6EA">
-    👋 Hi! I'm <strong style="color:#C0392B">Aria</strong>, Charlie's AI assistant.<br>Need a plumber? I can book your appointment right now!
-  </div>
-  <div id="cp-window" style="display:none;position:absolute;bottom:76px;right:0;width:360px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 120px);background:white;border-radius:20px;box-shadow:0 16px 48px rgba(0,0,0,0.2);flex-direction:column;overflow:hidden">
-    <div style="background:linear-gradient(135deg,#1A3A5C,#0d1f35);padding:14px 16px;display:flex;align-items:center;gap:10px;border-bottom:2px solid #C0392B;flex-shrink:0">
-      <div style="width:38px;height:38px;background:#C0392B;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🔧</div>
-      <div style="flex:1">
-        <div style="font-size:14px;font-weight:700;color:white">Aria — Charlie's Plumbing</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:4px;margin-top:1px"><span style="width:6px;height:6px;border-radius:50%;background:#2ecc71;display:inline-block"></span>Online · Replies instantly</div>
-      </div>
-      <a href="tel:8014068585" style="font-size:12px;color:rgba(255,255,255,0.5);text-decoration:none;font-weight:600">📞 Call</a>
-    </div>
-    <div id="cp-msgs" style="flex:1;overflow-y:auto;padding:14px;background:#F7F8FA;display:flex;flex-direction:column;gap:8px"></div>
-    <div id="cp-quick" style="padding:8px 14px;display:flex;flex-wrap:wrap;gap:6px;background:#F7F8FA;border-top:1px solid #E2E6EA;flex-shrink:0"></div>
-    <div id="cp-book-bar" style="display:none;padding:10px 14px;background:#1A3A5C;flex-shrink:0">
-      <button onclick="cpLaunchWizard()" style="width:100%;padding:10px;background:#C0392B;color:white;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:Barlow,sans-serif;letter-spacing:0.3px">📅 Open Booking Wizard</button>
-    </div>
-    <div style="padding:10px 14px;border-top:1px solid #E2E6EA;display:flex;gap:8px;background:white;flex-shrink:0">
-      <input id="cp-input" type="text" placeholder="Type a message..." style="flex:1;border:1px solid #E2E6EA;border-radius:24px;padding:9px 16px;font-size:13px;font-family:Barlow,sans-serif;outline:none;background:#F7F8FA" onkeypress="if(event.key==='Enter')cpSend()">
-      <button onclick="cpSend()" style="width:38px;height:38px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <svg fill="white" width="16" height="16" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      </button>
-    </div>
-    <div style="text-align:center;padding:5px;font-size:10px;color:#B0BEC5;background:white;flex-shrink:0">Powered by Aria AI &middot; (801) 406-8585</div>
-  </div>
-  <button id="cp-btn" onclick="cpToggle()" style="width:58px;height:58px;border-radius:50%;background:#C0392B;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(192,57,43,0.4);position:relative;transition:all 0.3s">
-    <span id="cp-badge" style="position:absolute;top:-4px;right:-4px;width:20px;height:20px;background:#F39C12;border-radius:50%;font-size:11px;font-weight:700;color:white;display:flex;align-items:center;justify-content:center">1</span>
-    <svg id="cp-chat-icon" width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    <svg id="cp-close-icon" width="22" height="22" fill="white" viewBox="0 0 24 24" style="display:none"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-  </button>
-</div>
-
-<style>
-/* Wizard styles */
-.bws{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative}
-.bws:not(:last-child)::after{content:'';position:absolute;top:14px;left:60%;width:80%;height:1.5px;background:#E2E6EA}
-.bws.done:not(:last-child)::after{background:#C0392B}
-.bwd{width:28px;height:28px;border-radius:50%;border:1.5px solid #E2E6EA;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:#7F8C8D;background:#fff;transition:all .25s;z-index:1}
-.bws.active .bwd{background:#1A3A5C;border-color:#1A3A5C;color:#fff}
-.bws.done .bwd{background:#C0392B;border-color:#C0392B;color:#fff}
-.bwsl{font-size:10px;color:#7F8C8D;font-weight:600;font-family:Barlow,sans-serif}
-.bws.active .bwsl{color:#1A3A5C}
-.bwinp{width:100%;padding:11px 14px;border:1px solid #E2E6EA;border-radius:8px;font-size:14px;font-family:Barlow,sans-serif;color:#2C3E50;background:#fff;outline:none;box-sizing:border-box;transition:border-color .2s}
-.bwinp:focus{border-color:#1A3A5C}
-.bwinp.bwerr{border-color:#C0392B}
-.bwta{width:100%;padding:11px 14px;border:1px solid #E2E6EA;border-radius:8px;font-size:14px;font-family:Barlow,sans-serif;color:#2C3E50;background:#fff;outline:none;resize:vertical;min-height:80px;line-height:1.5;box-sizing:border-box;transition:border-color .2s}
-.bwta:focus{border-color:#1A3A5C}
-.bwlbl{font-size:12px;font-weight:600;color:#7F8C8D;margin-bottom:6px;display:block;font-family:Barlow,sans-serif;text-transform:uppercase;letter-spacing:0.5px}
-.bwreq{color:#C0392B;margin-left:2px}
-.bwfld{margin-bottom:14px}
-.bwr2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bwr3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px}
-.bwsvc{border:1.5px solid #E2E6EA;border-radius:8px;padding:12px;cursor:pointer;transition:all .2s;display:flex;align-items:flex-start;gap:10px}
-.bwsvc:hover{border-color:#1A3A5C;background:#F8F9FA}
-.bwsvc.sel{border-color:#C0392B;background:#fdf0ee}
-.bwdates{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.bwdt{border:1.5px solid #E2E6EA;border-radius:8px;padding:10px 6px;cursor:pointer;text-align:center;transition:all .2s}
-.bwdt:hover{border-color:#1A3A5C}
-.bwdt.sel{border-color:#C0392B;background:#fdf0ee}
-.bwtimes{display:flex;flex-wrap:wrap;gap:8px}
-.bwtm{border:1.5px solid #E2E6EA;border-radius:8px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600;color:#2C3E50;transition:all .2s;font-family:Barlow,sans-serif}
-.bwtm:hover{border-color:#1A3A5C}
-.bwtm.sel{border-color:#C0392B;background:#fdf0ee;color:#C0392B}
-.bwcr{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #E2E6EA;font-size:13px;gap:12px;font-family:Barlow,sans-serif}
-.bwcr:last-child{border-bottom:none}
-.bwoptin{border:1px solid #E2E6EA;border-radius:8px;padding:14px;background:#F8F9FA;margin-top:4px}
-.bwcb{width:20px;height:20px;border:1.5px solid #E2E6EA;border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .2s;background:#fff;cursor:pointer}
-.bwcb.on{background:#1A3A5C;border-color:#1A3A5C}
-.bwem{font-size:11px;color:#C0392B;margin-top:3px;display:none;font-family:Barlow,sans-serif}
-.bwzr{font-size:13px;padding:8px 12px;border-radius:8px;margin-top:8px;display:none;font-family:Barlow,sans-serif}
-.bwzok{background:#eafaf1;color:#1E8449}
-.bwzno{background:#fdf0ee;color:#C0392B}
-/* Chat styles */
-.cpmsg{display:flex;gap:8px;max-width:90%;animation:cpin .25s ease}
-@keyframes cpin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.cpmsg.u{align-self:flex-end;flex-direction:row-reverse}
-.cpbub{background:white;border-radius:14px 14px 14px 4px;padding:9px 13px;font-size:13px;line-height:1.5;color:#2C3E50;box-shadow:0 1px 4px rgba(0,0,0,0.08);max-width:100%}
-.cpmsg.u .cpbub{background:#1A3A5C;color:white;border-radius:14px 14px 4px 14px}
-.cpav{width:26px;height:26px;border-radius:50%;background:#1A3A5C;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
-.cpmsg.u .cpav{background:#C0392B}
-.cpqb{background:white;border:1.5px solid #1A3A5C;color:#1A3A5C;padding:5px 11px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:Barlow,sans-serif;white-space:nowrap}
-.cpqb:hover{background:#1A3A5C;color:white}
-.cptyp{display:flex;gap:4px;padding:9px 13px;background:white;border-radius:14px 14px 14px 4px;box-shadow:0 1px 4px rgba(0,0,0,0.08);width:fit-content}
-.cptyp span{width:6px;height:6px;background:#B0BEC5;border-radius:50%;animation:cpt 1.2s infinite}
-.cptyp span:nth-child(2){animation-delay:.2s}
-.cptyp span:nth-child(3){animation-delay:.4s}
-@keyframes cpt{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-</style>
-
-<script>
-(function(){
-// ── WIZARD ────────────────────────────────────────────────────────────────────
-var STEPS=['Location','Service','Schedule','Contact','Confirm'];
-var SVCS=[
-  {i:'🚿',n:'Drain Cleaning',d:'Kitchen, bath, main line'},
-  {i:'🔥',n:'Water Heater',d:'Repair or replacement'},
-  {i:'🏗️',n:'Sewer Repair',d:'Camera & repair'},
-  {i:'💧',n:'Leak Detection',d:'Find & fix hidden leaks'},
-  {i:'🚽',n:'Toilet Service',d:'Repair or replacement'},
-  {i:'💎',n:'Water Softener',d:'Install & service'},
-  {i:'🔧',n:'General Repair',d:'Faucets, valves, pipes'},
-  {i:'🚨',n:'Emergency',d:'24/7 urgent response'}
-];
-var ZIPS=['84101','84102','84103','84104','84105','84106','84107','84108','84109','84110','84111','84112','84113','84114','84115','84116','84117','84118','84119','84120','84121','84123','84124','84128','84601','84602','84604','84057','84058','84070','84094','84095','84096','84065','84020','84047','84107'];
-var SB_URL='https://bfnwuurnzvncfumsnnds.supabase.co';
-var SB_KEY='sb_publishable_8aFV9Gj8xlDChJuXuENLHA_stiqieCr';
-var SMS_URL='https://charlies-plumbing-voice-production.up.railway.app/send-sms';
-
-var step=0,zipOk=false;
-var D={zip:'',svc:'',date:'',time:'',fn:'',ln:'',phone:'',email:'',street:'',city:'',addrZip:'',notes:'',sms:true};
-
-window.openWizard=function(prefillSvc){
-  step=0;zipOk=false;
-  Object.keys(D).forEach(function(k){D[k]=k==='sms'?true:'';});
-  if(prefillSvc)D.svc=prefillSvc;
-  document.getElementById('bw-overlay').style.display='flex';
-  bwRender();
-};
-window.closeWizard=function(){document.getElementById('bw-overlay').style.display='none';};
-window.nextStep=function(){
-  if(step===0&&!zipOk){alert('Please enter a valid zip code in our service area.');return;}
-  if(step===1&&!D.svc){alert('Please select a service.');return;}
-  if(step===2&&(!D.date||!D.time)){alert('Please select a date and time.');return;}
-  if(step===3&&!bwValidate())return;
-  if(step===4){bwSubmit();step=5;bwRender();return;}
-  step++;bwRender();
-};
-window.prevStep=function(){if(step>0){step--;bwRender();}};
-
-function bwRender(){
-  var prog=document.getElementById('bw-prog');
-  var body=document.getElementById('bw-body');
-  var next=document.getElementById('bw-next');
-  var back=document.getElementById('bw-back');
-  var lbl=document.getElementById('bw-lbl');
-  next.style.display='';next.style.background='#C0392B';next.innerHTML='Continue &#8594;';
-  back.style.display=(step>0&&step<5)?'block':'none';
-  lbl.textContent=step<5?('Step '+(step+1)+' of 5'):'';
-  if(step<5){
-    prog.style.display='flex';
-    prog.innerHTML=STEPS.map(function(s,i){
-      var cl='bws'+(i<step?' done':i===step?' active':'');
-      return '<div class="'+cl+'" style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative"><div class="bwd">'+(i<step?'&#10003;':(i+1))+'</div><div class="bwsl">'+s+'</div></div>';
-    }).join('');
-  } else prog.style.display='none';
-
-  if(step===0){
-    body.innerHTML='<div style="text-align:center;margin-bottom:20px"><div style="font-size:48px;margin-bottom:10px">📍</div><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:6px;font-family:Barlow,sans-serif">Where are you located?</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Enter your zip code to confirm we serve your area.</div></div><div class="bwfld"><label class="bwlbl">Zip code<span class="bwreq">*</span></label><input class="bwinp" id="bw-zip" maxlength="5" placeholder="e.g. 84101" value="'+D.zip+'" oninput="bwCheckZip(this.value)" style="text-align:center;font-size:22px;letter-spacing:4px"><div class="bwzr" id="bw-zr"></div></div>';
-    if(D.zip.length===5)bwCheckZip(D.zip);
-  }
-  else if(step===1){
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">What do you need?</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Select the service that best fits your situation.</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'+SVCS.map(function(s){return '<div class="bwsvc'+(D.svc===s.n?' sel':'')+'" onclick="bwSelSvc(\''+s.n+'\',this)"><div style="font-size:20px;flex-shrink:0;margin-top:1px">'+s.i+'</div><div><div style="font-size:13px;font-weight:600;color:#2C3E50;font-family:Barlow,sans-serif">'+s.n+'</div><div style="font-size:11px;color:#7F8C8D;margin-top:2px;font-family:Barlow,sans-serif">'+s.d+'</div></div></div>';}).join('')+'</div>';
-  }
-  else if(step===2){
-    var today=new Date();
-    var dates=[];
-    for(var i=0;i<6;i++){var d=new Date(today);d.setDate(today.getDate()+i+1);var full=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});dates.push({day:d.toLocaleDateString('en-US',{weekday:'short'}),num:d.getDate(),mon:d.toLocaleDateString('en-US',{month:'short'}),full:full});}
-    var times=['8:00 AM','10:00 AM','12:00 PM','2:00 PM','4:00 PM','6:00 PM'];
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">Pick a date &amp; time</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">Mountain Time. Subject to availability.</div></div><div class="bwdates">'+dates.map(function(d){return '<div class="bwdt'+(D.date===d.full?' sel':'')+'" onclick="bwSelDate(\''+d.full+'\',this)"><div style="font-size:10px;color:#7F8C8D;font-weight:600">'+d.day+'</div><div style="font-size:18px;font-weight:600;color:#2C3E50">'+d.num+'</div><div style="font-size:10px;color:#7F8C8D">'+d.mon+'</div></div>';}).join('')+'</div><div class="bwlbl" style="margin-bottom:10px">Preferred time<span class="bwreq">*</span></div><div class="bwtimes">'+times.map(function(t){return '<div class="bwtm'+(D.time===t?' sel':'')+'" onclick="bwSelTime(\''+t+'\',this)">'+t+'</div>';}).join('')+'</div>';
-  }
-  else if(step===3){
-    next.innerHTML='Review booking &#8594;';
-    body.innerHTML='<div style="margin-bottom:16px"><div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:4px;font-family:Barlow,sans-serif">Your contact info</div><div style="font-size:14px;color:#7F8C8D;font-family:Barlow,sans-serif">We\'ll confirm and call before arrival.</div></div>'
-      +'<div class="bwr2"><div class="bwfld"><label class="bwlbl">First name<span class="bwreq">*</span></label><input class="bwinp" id="f-fn" value="'+D.fn+'" placeholder="John" oninput="D.fn=this.value"><div class="bwem" id="e-fn">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Last name<span class="bwreq">*</span></label><input class="bwinp" id="f-ln" value="'+D.ln+'" placeholder="Smith" oninput="D.ln=this.value"><div class="bwem" id="e-ln">Required.</div></div></div>'
-      +'<div class="bwr2"><div class="bwfld"><label class="bwlbl">Phone<span class="bwreq">*</span></label><input class="bwinp" id="f-ph" value="'+D.phone+'" placeholder="(801) 555-0100" oninput="D.phone=this.value"><div class="bwem" id="e-ph">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Email<span class="bwreq">*</span></label><input class="bwinp" id="f-em" type="email" value="'+D.email+'" placeholder="you@email.com" oninput="D.email=this.value"><div class="bwem" id="e-em">Valid email required.</div></div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Street address<span class="bwreq">*</span></label><input class="bwinp" id="f-st" value="'+D.street+'" placeholder="123 Main St" oninput="D.street=this.value"><div class="bwem" id="e-st">Required.</div></div>'
-      +'<div class="bwr3"><div class="bwfld"><label class="bwlbl">City<span class="bwreq">*</span></label><input class="bwinp" id="f-ci" value="'+D.city+'" placeholder="Salt Lake City" oninput="D.city=this.value"><div class="bwem" id="e-ci">Required.</div></div>'
-      +'<div class="bwfld"><label class="bwlbl">State</label><input class="bwinp" id="f-st2" value="UT" readonly style="background:#F8F9FA;color:#7F8C8D"></div>'
-      +'<div class="bwfld"><label class="bwlbl">Zip<span class="bwreq">*</span></label><input class="bwinp" id="f-az" value="'+D.addrZip+'" placeholder="84101" oninput="D.addrZip=this.value"><div class="bwem" id="e-az">Required.</div></div></div>'
-      +'<div class="bwfld"><label class="bwlbl">Additional notes <span style="font-weight:400;color:#7F8C8D;text-transform:none">(optional)</span></label><textarea class="bwta" id="f-nt" placeholder="Describe the issue, access instructions, or anything helpful for our tech..." oninput="D.notes=this.value">'+D.notes+'</textarea></div>'
-      +'<div class="bwfld"><div class="bwoptin"><div style="display:flex;align-items:flex-start;gap:10px;cursor:pointer" onclick="bwToggle()"><div class="bwcb'+(D.sms?' on':'')+'" id="bw-cb">'+(D.sms?'<span style="color:#fff;font-size:12px">&#10003;</span>':'')+'</div><div style="font-size:13px;color:#2C3E50;line-height:1.5;font-family:Barlow,sans-serif">Receive text message updates about my appointment <span style="background:#e8f4fc;color:#1A3A5C;font-size:10px;font-weight:600;padding:2px 7px;border-radius:20px;margin-left:4px">SMS</span></div></div><div style="font-size:11px;color:#7F8C8D;margin-top:10px;padding-top:10px;border-top:1px solid #E2E6EA;line-height:1.5;font-family:Barlow,sans-serif">By checking this box you agree to receive automated appointment confirmation and status texts from Charlie\'s Plumbing. Msg &amp; data rates may apply. Reply STOP to cancel.</div></div></div>';
-    // Pre-fill address zip from step 1
-    if(!D.addrZip&&D.zip)D.addrZip=D.zip;
-    var azEl=document.getElementById('f-az');if(azEl&&!azEl.value&&D.zip)azEl.value=D.zip;
-  }
-  else if(step===4){
-    next.textContent='Confirm booking';
-    D.name=(D.fn+' '+D.ln).trim();
-    D.addr=D.street+', '+D.city+', UT '+D.addrZip;
-    var rows=[['Service',D.svc],['Date &amp; time',D.date+' &middot; '+D.time],['Address',D.addr],['Name',D.name],['Phone',D.phone],['Email',D.email],['SMS updates',D.sms?'&#10003; Opted in':'Not opted in']];
-    body.innerHTML='<div style="font-size:18px;font-weight:600;color:#2C3E50;margin-bottom:16px;font-family:Barlow,sans-serif">Review your booking</div>'
-      +'<div style="background:#F8F9FA;border-radius:8px;padding:14px;margin-bottom:'+(D.notes?'14':'0')+'px">'+rows.map(function(r){return '<div class="bwcr"><span style="color:#7F8C8D;flex-shrink:0">'+r[0]+'</span><span style="color:#2C3E50;font-weight:600;text-align:right">'+r[1]+'</span></div>';}).join('')+'</div>'
-      +(D.notes?'<div class="bwlbl" style="margin-bottom:6px;margin-top:2px">Notes</div><div style="background:#F8F9FA;border-radius:8px;padding:10px 12px;font-size:13px;color:#7F8C8D;line-height:1.5;font-style:italic;font-family:Barlow,sans-serif">'+D.notes+'</div>':'')
-      +'<div style="font-size:12px;color:#7F8C8D;line-height:1.5;margin-top:14px;font-family:Barlow,sans-serif">By confirming you agree to our Terms of Service.'+(D.sms?' Appointment updates will be sent via text to '+D.phone+'.':'')+'</div>';
-  }
-  else if(step===5){
-    next.style.display='none';back.style.display='none';lbl.textContent='';
-    body.innerHTML='<div style="text-align:center;padding:20px 0">'
-      +'<div style="width:64px;height:64px;border-radius:50%;background:#eafaf1;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px">&#10003;</div>'
-      +'<div style="font-size:22px;font-weight:700;color:#2C3E50;margin-bottom:10px;font-family:Barlow Condensed,sans-serif;letter-spacing:0.5px">You\'re booked!</div>'
-      +'<div style="font-size:15px;color:#7F8C8D;line-height:1.7;margin-bottom:20px;font-family:Barlow,sans-serif">Your request for <strong style="color:#2C3E50">'+D.svc+'</strong> on <strong style="color:#2C3E50">'+D.date+' at '+D.time+'</strong> has been received.<br><br>Confirmation sent to <strong style="color:#2C3E50">'+D.email+'</strong>.'+(D.sms?' Text updates to <strong style="color:#2C3E50">'+D.phone+'</strong>.':'')+'<br><br>Our team will call to confirm shortly.</div>'
-      +'<div style="background:#e8f4fc;border-radius:8px;padding:12px 16px;font-size:13px;color:#1A3A5C;margin-bottom:20px;text-align:left;font-family:Barlow,sans-serif"><strong>Need to reach us?</strong><br>Call or text (801) 406-8585 &middot; Mon&ndash;Sat 7AM&ndash;7PM &middot; 24/7 Emergency</div>'
-      +'<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a href="tel:8014068585" style="padding:10px 20px;background:#1A3A5C;color:#fff;border-radius:8px;font-size:14px;text-decoration:none;font-weight:600;font-family:Barlow Condensed,sans-serif">&#128222; Call (801) 406-8585</a>'
-      +'<button onclick="closeWizard()" style="padding:10px 20px;border-radius:8px;border:1px solid #E2E6EA;background:#fff;font-size:14px;cursor:pointer;font-family:Barlow,sans-serif">Close</button></div></div>';
-  }
-}
-
-window.bwCheckZip=function(v){
-  D.zip=v;
-  if(v.length<5){document.getElementById('bw-zr').style.display='none';zipOk=false;return;}
-  var el=document.getElementById('bw-zr');
-  if(ZIPS.indexOf(v)>=0){el.className='bwzr bwzok';el.textContent='✓ Great news — we service your area!';zipOk=true;}
-  else{el.className='bwzr bwzno';el.textContent='✗ We may not serve that area. Call (801) 406-8585 to confirm.';zipOk=false;}
-  el.style.display='block';
-};
-window.bwSelSvc=function(n,el){D.svc=n;document.querySelectorAll('.bwsvc').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwSelDate=function(d,el){D.date=d;document.querySelectorAll('.bwdt').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwSelTime=function(t,el){D.time=t;document.querySelectorAll('.bwtm').forEach(function(e){e.classList.remove('sel');});el.classList.add('sel');};
-window.bwToggle=function(){D.sms=!D.sms;var cb=document.getElementById('bw-cb');cb.className='bwcb'+(D.sms?' on':'');cb.innerHTML=D.sms?'<span style="color:#fff;font-size:12px">&#10003;</span>':'';};
-
-function bwShowErr(id,show){var e=document.getElementById('e-'+id);var i=document.getElementById('f-'+id);if(e)e.style.display=show?'block':'none';if(i){if(show)i.classList.add('bwerr');else i.classList.remove('bwerr');}}
-function bwValidate(){
-  var ok=true;
-  if(!D.fn.trim()){bwShowErr('fn',true);ok=false;}else bwShowErr('fn',false);
-  if(!D.ln.trim()){bwShowErr('ln',true);ok=false;}else bwShowErr('ln',false);
-  if(!D.phone.trim()){bwShowErr('ph',true);ok=false;}else bwShowErr('ph',false);
-  if(!D.email.trim()||D.email.indexOf('@')<0){bwShowErr('em',true);ok=false;}else bwShowErr('em',false);
-  if(!D.street.trim()){bwShowErr('st',true);ok=false;}else bwShowErr('st',false);
-  if(!D.city.trim()){bwShowErr('ci',true);ok=false;}else bwShowErr('ci',false);
-  if(!D.addrZip.trim()){bwShowErr('az',true);ok=false;}else bwShowErr('az',false);
-  return ok;
-}
-function bwSubmit(){
-  D.name=(D.fn+' '+D.ln).trim();
-  D.addr=D.street+', '+D.city+', UT '+D.addrZip;
-  fetch(SB_URL+'/rest/v1/customers',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Prefer':'resolution=merge-duplicates,return=representation'},body:JSON.stringify({name:D.name,phone:D.phone,email:D.email,address:D.addr})})
-  .then(function(r){return r.json();}).then(function(cust){
-    var c=Array.isArray(cust)?cust[0]:cust;
-    return fetch(SB_URL+'/rest/v1/jobs',{method:'POST',headers:{'Content-Type':'application/json','apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY},body:JSON.stringify({customer_id:c&&c.id?c.id:null,service_type:D.svc,address:D.addr,notes:(D.notes?D.notes+' ':'')+'Preferred: '+D.date+' '+D.time+(D.sms?' | SMS: yes':' | SMS: no'),status:'scheduled',source:'website_wizard',urgency:D.svc==='Emergency'?'urgent':'normal'})});
-  }).catch(function(e){console.error('Booking error:',e);});
-  if(D.sms&&D.phone){fetch(SMS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:D.phone,body:"Hi "+D.fn+"! Charlie's Plumbing received your booking for "+D.svc+" on "+D.date+" at "+D.time+". We'll call to confirm shortly. Questions? Call (801) 406-8585."})}).catch(function(){});}
-}
-
-// ── WEBCHAT ───────────────────────────────────────────────────────────────────
-var cpOpen_state=false,cpHistory=[],cpBookingStarted=false;
-var CHAT_URL='https://charlies-plumbing-voice-production.up.railway.app/chat';
-var CP_SYSTEM='You are Aria, the AI assistant for Charlie\'s Plumbing. Keep all answers to 1-2 sentences. CRITICAL RULE: NEVER collect booking info in chat. NEVER ask for name, phone, address, or service in chat. If the user mentions booking, scheduling, appointment, or service — respond ONLY with \"I\'ll open our booking wizard for you!\" and use the launch_booking_wizard tool immediately. Do not ask anything first. Just launch it. Pricing: drain cleaning from $89, water heaters from $800, sewer inspection from $149. Hours: Mon-Fri 7AM-7PM, Sat 8AM-5PM, emergency 24\/7. Service area: Salt Lake City metro and Wasatch Front.';\
-
-
-window.cpToggle=function(){cpOpen_state?cpClose():cpOpen();};
-window.cpOpen=function(){
-  cpOpen_state=true;
-  document.getElementById('cp-window').style.display='flex';
-  document.getElementById('cp-chat-icon').style.display='none';
-  document.getElementById('cp-close-icon').style.display='block';
-  document.getElementById('cp-greeting').style.display='none';
-  document.getElementById('cp-badge').style.display='none';
-  if(cpHistory.length===0){setTimeout(function(){cpAddMsg('bot','👋 Hi! I\'m Aria, Charlie\'s Plumbing\'s AI assistant.\n\nI can answer questions about our services, pricing, and availability — or open our booking wizard to schedule your appointment in just a few steps.\n\nHow can I help?');cpShowQuick(['📅 Book appointment','Pricing info','Service area?','Emergency help']);},300);}
-  document.getElementById('cp-input').focus();
-};
-window.cpClose=function(){
-  cpOpen_state=false;
-  document.getElementById('cp-window').style.display='none';
-  document.getElementById('cp-chat-icon').style.display='block';
-  document.getElementById('cp-close-icon').style.display='none';
-};
-window.cpLaunchWizard=function(){cpClose();openWizard();};
-
-setTimeout(function(){if(!cpOpen_state)document.getElementById('cp-greeting').style.display='block';},10000);
-
-function cpAddMsg(role,text){
-  var msgs=document.getElementById('cp-msgs');
-  var div=document.createElement('div');
-  div.className='cpmsg'+(role==='user'?' u':'');
-  var av=document.createElement('div');av.className='cpav';av.textContent=role==='user'?'👤':'🔧';
-  var bub=document.createElement('div');bub.className='cpbub';bub.innerHTML=text.replace(/\n/g,'<br>');
-  div.appendChild(av);div.appendChild(bub);
-  msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
-}
-function cpShowTyping(){
-  var msgs=document.getElementById('cp-msgs');
-  var div=document.createElement('div');div.className='cpmsg';div.id='cp-typ';
-  var av=document.createElement('div');av.className='cpav';av.textContent='🔧';
-  var t=document.createElement('div');t.className='cptyp';t.innerHTML='<span></span><span></span><span></span>';
-  div.appendChild(av);div.appendChild(t);msgs.appendChild(div);msgs.scrollTop=msgs.scrollHeight;
-}
-function cpRemoveTyping(){var e=document.getElementById('cp-typ');if(e)e.remove();}
-function cpShowQuick(opts){
-  var c=document.getElementById('cp-quick');c.innerHTML='';
-  opts.forEach(function(o){
-    var b=document.createElement('button');b.className='cpqb';b.textContent=o;
-    b.onclick=function(){
-      if(o.indexOf('wizard')>=0||o.indexOf('Book')>=0||o.indexOf('book')>=0||o.indexOf('Schedule')>=0){cpLaunchWizard();return;}
-      if(o.indexOf('Call (801)')>=0){window.open('tel:8014068585');return;}
-      document.getElementById('cp-input').value=o;cpSend();
-    };
-    c.appendChild(b);
+    cpAddMsg('bot', 'Sorry, had a brief issue. Call us at 📞 (801) 406-8585!');
   });
 }
-function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
-
-// Booking intent keywords — intercept before hitting API
-var BOOK_KEYWORDS=['book','schedul','appoint','come out','send someone','need a plumber','fix','repair','install','replace','service','drain','heater','sewer','leak','toilet','softener','emergency','urgent','asap','today','tomorrow','available','when can'];
-
-window.cpSend=function(){
-  var input=document.getElementById('cp-input');
-  var text=input.value.trim();if(!text)return;
-  input.value='';document.getElementById('cp-quick').innerHTML='';
-  cpAddMsg('user',text);
-
-  // Client-side booking intent detection — no API call needed
-  var lower=text.toLowerCase();
-  var isBooking=BOOK_KEYWORDS.some(function(k){return lower.indexOf(k)>=0;});
-
-  if(isBooking){
-    setTimeout(function(){
-      cpAddMsg('bot','I\'ll open our booking wizard for you! It only takes 2 minutes. 📅');
-      cpShowBookBar(true);
-      cpShowQuick(['📅 Open booking wizard','Call instead']);
-    },400);
-    return;
-  }
-
-  // Non-booking question — send to Claude
-  cpHistory.push({role:'user',content:text});
-  cpShowTyping();
-  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM})})
-  .then(function(r){return r.json();}).then(function(data){
-    cpRemoveTyping();
-    var reply=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
-    if(reply){cpHistory.push({role:'assistant',content:reply});cpAddMsg('bot',reply);}
-    cpShowBookBar(false);
-    cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
-  }).catch(function(err){
-    cpRemoveTyping();
-    cpAddMsg('bot','Sorry, I had a brief issue. Call us at 📞 (801) 406-8585 and we\'ll help right away!');
-    console.error('Chat error:',err);
-  });
-};
-})();
 </script>
 
 </body>
