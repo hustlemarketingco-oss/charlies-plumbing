@@ -1269,9 +1269,19 @@ function bwValidate() {
   return ok;
 }
 
+function bwParseScheduled(dateStr, timeStr) {
+  try {
+    var year = new Date().getFullYear();
+    var dt = new Date(dateStr + ' ' + year + ' ' + timeStr);
+    if (dt < new Date()) dt.setFullYear(dt.getFullYear() + 1);
+    return isNaN(dt.getTime()) ? null : dt.toISOString();
+  } catch(e) { return null; }
+}
+
 function bwSubmit() {
   BW.D.name = (BW.D.fn + ' ' + BW.D.ln).trim();
   BW.D.addr = BW.D.street + ', ' + BW.D.city + ', UT ' + BW.D.addrZip;
+  var scheduledAt = bwParseScheduled(BW.D.date, BW.D.time);
   fetch(BW.SB_URL + '/rest/v1/customers', {
     method: 'POST',
     headers: {'Content-Type':'application/json','apikey':BW.SB_KEY,'Authorization':'Bearer '+BW.SB_KEY,'Prefer':'resolution=merge-duplicates,return=representation'},
@@ -1281,7 +1291,16 @@ function bwSubmit() {
     fetch(BW.SB_URL + '/rest/v1/jobs', {
       method: 'POST',
       headers: {'Content-Type':'application/json','apikey':BW.SB_KEY,'Authorization':'Bearer '+BW.SB_KEY},
-      body: JSON.stringify({customer_id:c&&c.id?c.id:null,service_type:BW.D.svc,address:BW.D.addr,notes:(BW.D.notes?BW.D.notes+' ':'')+'Preferred: '+BW.D.date+' '+BW.D.time+(BW.D.sms?' | SMS: yes':' | SMS: no'),status:'scheduled',source:'website_wizard',urgency:BW.D.svc==='Emergency'?'urgent':'normal'})
+      body: JSON.stringify({
+        customer_id: c&&c.id ? c.id : null,
+        service_type: BW.D.svc,
+        address: BW.D.addr,
+        scheduled_at: scheduledAt,
+        notes: (BW.D.notes ? BW.D.notes + ' | ' : '') + (BW.D.sms ? 'SMS: yes' : 'SMS: no'),
+        status: 'scheduled',
+        source: 'website_wizard',
+        urgency: BW.D.svc === 'Emergency' ? 'urgent' : 'normal'
+      })
     });
   }).catch(function(e) { console.error('Booking error:', e); });
   if (BW.D.sms && BW.D.phone) {
