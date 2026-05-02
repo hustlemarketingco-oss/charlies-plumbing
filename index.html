@@ -1919,35 +1919,41 @@ function cpShowQuick(opts){
 }
 function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
 
+// Booking intent keywords — intercept before hitting API
+var BOOK_KEYWORDS=['book','schedul','appoint','come out','send someone','need a plumber','fix','repair','install','replace','service','drain','heater','sewer','leak','toilet','softener','emergency','urgent','asap','today','tomorrow','available','when can'];
+
 window.cpSend=function(){
   var input=document.getElementById('cp-input');
   var text=input.value.trim();if(!text)return;
   input.value='';document.getElementById('cp-quick').innerHTML='';
   cpAddMsg('user',text);
-  cpHistory.push({role:'user',content:text});
-  cpShowTyping();
-  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM,tools:[{name:'launch_booking_wizard',description:'Launch the booking wizard when the user wants to schedule an appointment. This opens the full 5-step booking experience.',input_schema:{type:'object',properties:{service:{type:'string',description:'Pre-selected service if mentioned'}},required:[]}}]})})
-  .then(function(r){return r.json();}).then(function(data){
-    cpRemoveTyping();
-    var text='';var launched=false;
-    (data.content||[]).forEach(function(block){
-      if(block.type==='text')text+=block.text;
-      if(block.type==='tool_use'&&block.name==='launch_booking_wizard'){launched=true;var svc=block.input&&block.input.service?block.input.service:'';}
-    });
-    if(text){cpHistory.push({role:'assistant',content:text});cpAddMsg('bot',text);}
-    if(launched){
+
+  // Client-side booking intent detection — no API call needed
+  var lower=text.toLowerCase();
+  var isBooking=BOOK_KEYWORDS.some(function(k){return lower.indexOf(k)>=0;});
+
+  if(isBooking){
+    setTimeout(function(){
+      cpAddMsg('bot','I\'ll open our booking wizard for you! It only takes 2 minutes. 📅');
       cpShowBookBar(true);
       cpShowQuick(['📅 Open booking wizard','Call instead']);
-    } else if(text.toLowerCase().indexOf('book')>=0||text.toLowerCase().indexOf('schedule')>=0||text.toLowerCase().indexOf('appointment')>=0){
-      cpShowBookBar(true);
-      cpShowQuick(['📅 Open booking wizard','More questions']);
-    } else {
-      cpShowBookBar(false);
-      cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
-    }
+    },400);
+    return;
+  }
+
+  // Non-booking question — send to Claude
+  cpHistory.push({role:'user',content:text});
+  cpShowTyping();
+  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM})})
+  .then(function(r){return r.json();}).then(function(data){
+    cpRemoveTyping();
+    var reply=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+    if(reply){cpHistory.push({role:'assistant',content:reply});cpAddMsg('bot',reply);}
+    cpShowBookBar(false);
+    cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
   }).catch(function(err){
     cpRemoveTyping();
-    cpAddMsg('bot','Sorry, I had a brief issue. You can call us directly at 📞 (801) 406-8585 and we\'ll help right away!');
+    cpAddMsg('bot','Sorry, I had a brief issue. Call us at 📞 (801) 406-8585 and we\'ll help right away!');
     console.error('Chat error:',err);
   });
 };
@@ -2272,35 +2278,41 @@ function cpShowQuick(opts){
 }
 function cpShowBookBar(show){document.getElementById('cp-book-bar').style.display=show?'block':'none';}
 
+// Booking intent keywords — intercept before hitting API
+var BOOK_KEYWORDS=['book','schedul','appoint','come out','send someone','need a plumber','fix','repair','install','replace','service','drain','heater','sewer','leak','toilet','softener','emergency','urgent','asap','today','tomorrow','available','when can'];
+
 window.cpSend=function(){
   var input=document.getElementById('cp-input');
   var text=input.value.trim();if(!text)return;
   input.value='';document.getElementById('cp-quick').innerHTML='';
   cpAddMsg('user',text);
-  cpHistory.push({role:'user',content:text});
-  cpShowTyping();
-  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM,tools:[{name:'launch_booking_wizard',description:'Launch the booking wizard when the user wants to schedule an appointment. This opens the full 5-step booking experience.',input_schema:{type:'object',properties:{service:{type:'string',description:'Pre-selected service if mentioned'}},required:[]}}]})})
-  .then(function(r){return r.json();}).then(function(data){
-    cpRemoveTyping();
-    var text='';var launched=false;
-    (data.content||[]).forEach(function(block){
-      if(block.type==='text')text+=block.text;
-      if(block.type==='tool_use'&&block.name==='launch_booking_wizard'){launched=true;var svc=block.input&&block.input.service?block.input.service:'';}
-    });
-    if(text){cpHistory.push({role:'assistant',content:text});cpAddMsg('bot',text);}
-    if(launched){
+
+  // Client-side booking intent detection — no API call needed
+  var lower=text.toLowerCase();
+  var isBooking=BOOK_KEYWORDS.some(function(k){return lower.indexOf(k)>=0;});
+
+  if(isBooking){
+    setTimeout(function(){
+      cpAddMsg('bot','I\'ll open our booking wizard for you! It only takes 2 minutes. 📅');
       cpShowBookBar(true);
       cpShowQuick(['📅 Open booking wizard','Call instead']);
-    } else if(text.toLowerCase().indexOf('book')>=0||text.toLowerCase().indexOf('schedule')>=0||text.toLowerCase().indexOf('appointment')>=0){
-      cpShowBookBar(true);
-      cpShowQuick(['📅 Open booking wizard','More questions']);
-    } else {
-      cpShowBookBar(false);
-      cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
-    }
+    },400);
+    return;
+  }
+
+  // Non-booking question — send to Claude
+  cpHistory.push({role:'user',content:text});
+  cpShowTyping();
+  fetch(CHAT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:cpHistory,system:CP_SYSTEM})})
+  .then(function(r){return r.json();}).then(function(data){
+    cpRemoveTyping();
+    var reply=(data.content||[]).filter(function(b){return b.type==='text';}).map(function(b){return b.text;}).join('');
+    if(reply){cpHistory.push({role:'assistant',content:reply});cpAddMsg('bot',reply);}
+    cpShowBookBar(false);
+    cpShowQuick(['📅 Book appointment','Pricing info','Call (801) 406-8585']);
   }).catch(function(err){
     cpRemoveTyping();
-    cpAddMsg('bot','Sorry, I had a brief issue. You can call us directly at 📞 (801) 406-8585 and we\'ll help right away!');
+    cpAddMsg('bot','Sorry, I had a brief issue. Call us at 📞 (801) 406-8585 and we\'ll help right away!');
     console.error('Chat error:',err);
   });
 };
